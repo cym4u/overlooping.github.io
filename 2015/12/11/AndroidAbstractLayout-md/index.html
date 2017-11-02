@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android抽象布局——include、merge 、ViewStub | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android抽象布局——include、merge 、ViewStub">
+<meta property="og:url" content="http://chenyuanming.cn/2015/12/11/AndroidAbstractLayout-md/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:updated_time" content="2016-03-24T06:36:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android抽象布局——include、merge 、ViewStub">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-AndroidAbstractLayout-md" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/11/AndroidAbstractLayout-md/" class="article-date">
+      <time datetime="2015-12-11T06:18:38.000Z" itemprop="datePublished">2015-12-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android抽象布局——include、merge 、ViewStub
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/experience/">experience</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tips/">tips</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a><br>转载自<a href="http://blog.csdn.net/xyz_lmn/article/details/14524567" target="_blank" rel="external">http://blog.csdn.net/xyz_lmn/article/details/14524567</a></p>
+<h3 id="u63CF_u8FF0"><a href="#u63CF_u8FF0" class="headerlink" title="描述"></a>描述</h3><p>在布局优化中，Androi的官方提到了这三种布局<include></include>、<merge></merge>、<viewstub></viewstub>，并介绍了这三种布局各有的优势，下面也是简单说一下他们的优势，以及怎么使用，记下来权当做笔记。</p>
+<h4 id="u5E03_u5C40_u91CD_u7528include"><a href="#u5E03_u5C40_u91CD_u7528include" class="headerlink" title="布局重用include"></a>布局重用include</h4><p><include></include>标签能够重用布局文件，简单的使用如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">Linearlayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">”match_parent”</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">”match_parent”</span></span><br><span class="line">    <span class="attribute">android:background</span>=<span class="value">"@color/app_bg"</span></span><br><span class="line">    <span class="attribute">android:gravity</span>=<span class="value">"center_horizontal"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">include</span> <span class="attribute">layout</span>=<span class="value">"@layout/titlebar"</span>&gt;</span><span class="tag">&lt;/<span class="title">include</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">TextVew</span> <span class="attribute">android:layout_width</span>=<span class="value">”match_parent”</span></span><br><span class="line">              <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">              <span class="attribute">android:text</span>=<span class="value">"@string/hello"</span></span><br><span class="line">              <span class="attribute">android:padding</span>=<span class="value">"10dp"</span>&gt;</span><span class="tag">&lt;/<span class="title">TextView</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">Linearlayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>1)<include></include>标签可以使用单独的layout属性，这个也是必须使用的。<br>2)可以使用其他属性。<include></include>标签若指定了ID属性，而你的layout也定义了ID，则你的layout的ID会被覆盖，解决方案。<br>3)在include标签中所有的android:layout_*都是有效的，前提是必须要写layout_width和layout_height两个属性。<br>4)布局中可以包含两个相同的include标签，引用时可以使用如下方法解决（参考）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">View bookmarks_container_2 = findViewById(R.id.bookmarks_favourite);</span><br><span class="line">bookmarks_container_2.findViewById(R.id.bookmarks_list);</span><br></pre></td></tr></table></figure>
+<h4 id="u51CF_u5C11_u89C6_u56FE_u5C42_u7EA7merge"><a href="#u51CF_u5C11_u89C6_u56FE_u5C42_u7EA7merge" class="headerlink" title="减少视图层级merge"></a>减少视图层级merge</h4><pre><code>&lt;merge&gt;&lt;/merge&gt;标签在UI的结构优化中起着非常重要的作用，它可以删减多余的层级，优化UI。&lt;merge&gt;&lt;/merge&gt;多用于替换FrameLayout或者当一个布局包含另一个时，&lt;merge&gt;&lt;/merge&gt;标签消除视图层次结构中多余的视图组。例如你的主布局文件是垂直布局，引入了一个垂直布局的include，这是如果include布局使用的LinearLayout就没意义了，使用的话反而减慢你的UI表现。这时可以使用&lt;merge&gt;&lt;/merge&gt;标签优化。
+</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">merge</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:text</span>=<span class="value">"@string/add"</span>&gt;</span><span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:text</span>=<span class="value">"@string/delete"</span>&gt;</span><span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">merge</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在，当你添加该布局文件时(使用<include></include>标签)，系统忽略<merge></merge>节点并且直接添加两个Button。更多<merge></merge>介绍可以参考《Android Layout Tricks #3: Optimize by merging》</p>
+<h4 id="u9700_u8981_u65F6_u4F7F_u7528viewstub"><a href="#u9700_u8981_u65F6_u4F7F_u7528viewstub" class="headerlink" title="需要时使用viewstub"></a>需要时使用viewstub</h4><pre><code>&lt;viewstub&gt;&lt;/viewstub&gt;标签最大的优点是当你需要时才会加载，使用他并不会影响UI初始化时的性能。各种不常用的布局想进度条、显示错误消息等可以使用&lt;viewstub&gt;&lt;/viewstub&gt;标签，以减少内存使用量，加快渲染速度。&lt;viewstub&gt;&lt;/viewstub&gt;是一个不可见的，大小为0的View。&lt;viewstub&gt;&lt;/viewstub&gt;标签使用如下：
+</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">viewstub</span> <span class="attribute">android:id</span>=<span class="value">"@+id/stub_import"</span></span><br><span class="line">    <span class="attribute">android:inflatedId</span>=<span class="value">"@+id/panel_import"</span></span><br><span class="line">    <span class="attribute">android:layout</span>=<span class="value">"@layout/progress_overlay"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">    <span class="attribute">android:layout_gravity</span>=<span class="value">"bottom"</span>&gt;</span><span class="tag">&lt;/<span class="title">viewstub</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当你想加载布局时，可以使用下面其中一种方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">((ViewStub) findViewById(R.id.stub_import)).setVisibility(View.VISIBLE);</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">View importPanel = ((ViewStub) findViewById(R.id.stub_import)).inflate();</span><br></pre></td></tr></table></figure></p>
+<p>当调用inflate()函数的时候，ViewStub被引用的资源替代，并且返回引用的view。 这样程序可以直接得到引用的view而不用再次调用函数findViewById()来查找了。<br>注：ViewStub目前有个缺陷就是还不支持 <merge></merge>标签。</p>
+<p>更多<viewstub></viewstub>标签介绍可以参考<a href="http://android-developers.blogspot.com/2009/03/android-layout-tricks-3-optimize-with.html" target="_blank" rel="external">《Android Layout Tricks #3: Optimize with stubs》</a></p>
+<h3 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h3><p><a href="http://developer.android.com/training/improving-layouts/reusing-layouts.html" target="_blank" rel="external">http://developer.android.com/training/improving-layouts/reusing-layouts.html</a></p>
+<p><a href="http://android-developers.blogspot.com/2009/03/android-layout-tricks-3-optimize-by.html" target="_blank" rel="external">http://android-developers.blogspot.com/2009/03/android-layout-tricks-3-optimize-by.html</a></p>
+<p><a href="http://developer.android.com/training/improving-layouts/optimizing-layout.html#Lint" target="_blank" rel="external">http://developer.android.com/training/improving-layouts/optimizing-layout.html#Lint</a></p>
+<p><a href="http://android-developers.blogspot.com/2009/02/android-layout-tricks-1.html" target="_blank" rel="external">http://android-developers.blogspot.com/2009/02/android-layout-tricks-1.html</a></p>
+<p><a href="http://developer.android.com/training/improving-layouts/loading-ondemand.html" target="_blank" rel="external">http://developer.android.com/training/improving-layouts/loading-ondemand.html</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2015年12月11日 - 14时18分</p>
+        <p><span>最后更新:</span>2016年03月24日 - 14时36分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/11/AndroidAbstractLayout-md/" title="Android抽象布局——include、merge 、ViewStub">http://chenyuanming.cn/2015/12/11/AndroidAbstractLayout-md/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2015/12/11/AndroidAbstractLayout-md/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/11/usage-of-strings-xml/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          usage of strings.xml
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/10/android-json2java-1-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">android json2java 1.4</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u63CF_u8FF0"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u5E03_u5C40_u91CD_u7528include"><span class="toc-number">1.1.</span> <span class="toc-text">布局重用include</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u51CF_u5C11_u89C6_u56FE_u5C42_u7EA7merge"><span class="toc-number">1.2.</span> <span class="toc-text">减少视图层级merge</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u9700_u8981_u65F6_u4F7F_u7528viewstub"><span class="toc-number">1.3.</span> <span class="toc-text">需要时使用viewstub</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003"><span class="toc-number">2.</span> <span class="toc-text">参考</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/11/usage-of-strings-xml/" title="上一篇: usage of strings.xml">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/10/android-json2java-1-4/" title="下一篇: android json2java 1.4">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

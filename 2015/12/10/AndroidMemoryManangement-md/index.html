@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android内存管理 | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android内存管理">
+<meta property="og:url" content="http://chenyuanming.cn/2015/12/10/AndroidMemoryManangement-md/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/bitmap_2.3.x.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/bitmap_3.0.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/memory_usage_info.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/shallow_heap_and_retained_heap.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/gc_0.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/gc_1.png">
+<meta property="og:updated_time" content="2016-03-18T01:56:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android内存管理">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-AndroidMemoryManangement-md" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/10/AndroidMemoryManangement-md/" class="article-date">
+      <time datetime="2015-12-10T02:45:59.000Z" itemprop="datePublished">2015-12-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android内存管理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/experience/">experience</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tips/">tips</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a><br>转自：<a href="http://wangxinghe.github.io/blog/2014-11-30/android-memory-management/" target="_blank" rel="external">android-memory-management/</a><br>前一段时间自己学习了下Android内存管理相关的东西，在部门内部做了一次技术分享。作为一个在公开场合会腼腆，上不了台面，表达能力也不行的人来说是一个不小的进步。一直很佩服墙内墙外的牛人们坚持写博客和大家分享的精神。嗯，今天就将上次的技术分享写在博客里面，希望对大家有帮助。</p>
+<p>下面分为4个部分来阐述：</p>
+<ul>
+<li>Android内存管理机制</li>
+<li>Android App中内存管理优化</li>
+<li>检测内存使用情况</li>
+<li>内存泄漏</li>
+</ul>
+<h3 id="u4E00_u3001Android_u7CFB_u7EDF_u5185_u5B58_u7BA1_u7406_u673A_u5236"><a href="#u4E00_u3001Android_u7CFB_u7EDF_u5185_u5B58_u7BA1_u7406_u673A_u5236" class="headerlink" title="一、Android系统内存管理机制"></a>一、Android系统内存管理机制</h3><p>1.Linux vs. Windows<br>两者都能将物理内存中长时间不使用的内容转移到磁盘空间上，再次访问时才加载回内存。<br>Windows只在应用程序需要的时候才会分配内存，不能充分充分利用内存。<br>Linux充分利用物理内存空间（RAM）及其高速读写特性，将程序调用过程中的硬盘数据读入内存，提高数据访问性能。</p>
+<p>Android是基于Linux系统的，继承了Linux的很多优秀特性。但是Android没有可交换磁盘空间（swap space）,所有的内存都存在于RAM中，这使得Android系统释放内存的唯一方式就是释放引用的对象。</p>
+<p>2.Android进程和内存</p>
+<p>Android进程包含2种：<br>（1）Native进程：采用C/C++实现，不包含dalvik实例的进程。/system/bin/目录下面的文件运行后都是以native进程存在的。<br>（2）Java进程：Android中运行于dalvik虚拟机上的进程。dalvik虚拟机的宿主进程由fork()系统调用创建，所以每一个Java进程都存在于一个Native进程中。由于每个Java存在一个虚拟机实例，因此Java进程内存分配要比Native进程复杂。</p>
+<p>3.Android中的java程序为啥容易OOM？<br>Android对dalvik的vm heapsize作了限制，当Java进程申请的内存超过阈值时，会抛出OOM异常。<br>程序发生OOM并不能说明RAM不足，只能说明是Java heap超出了dalvik vm heapsize的阈值。<br>当RAM内存不足时，memory killer会杀掉低优先级进程，保证高优先级进程有更多内存。</p>
+<p>Google之所以这样设计，处于以下考虑：<br>为了让比较多的进程同时常驻内存，这样程序启动时不需要每次都加载到内存，能够给用户更快的响应。通过限制每个应用程序的内存，使得Android系统内存中同时常驻多个进程。</p>
+<p>4.如何绕过dalvik vm heapsize的限制<br>（1）创建子进程<br>（2）使用JNI在native heap上申请内存（推荐）<br>（3）使用RAM中的显存空间</p>
+<h3 id="u4E8C_u3001Android_App_u4E2D_u5185_u5B58_u7BA1_u7406_u4F18_u5316"><a href="#u4E8C_u3001Android_App_u4E2D_u5185_u5B58_u7BA1_u7406_u4F18_u5316" class="headerlink" title="二、Android App中内存管理优化"></a>二、Android App中内存管理优化</h3><p>1.Use services sparingly</p>
+<ul>
+<li>尽量少用<code>Service</code>，当后台任务运行完成时及时关闭<code>Service</code></li>
+<li>用<code>IntentService</code>取代<code>Service</code>，当后台任务完成时自动结束服务自身</li>
+</ul>
+<p>原因：Service启动时，Service所在进程会保持运行状态，Service所占用的内存不会释放，使得进程占用资源过多，因此系统LRU cache中能同时保持的进程数减少，应用程序的切换变得更低效。由于没有足够的进程来处理系统中的Service，也会导致系统稳定性变差。</p>
+<p>2.当UI不可见或内存紧张时，释放内存：<br>在<code>Activity</code>的回调方法<code>onTrimMemory(int level)</code>中根据level的不同释放内存。<br>进程不在缓存中：</p>
+<ul>
+<li><code>TRIM_MEMORY_RUNNING_MODERATE</code> 应用程序正在运行，并且处于非killable状态，此时设备内存低（low），系统主动杀LRU缓存中的进程</li>
+<li><code>TRIM_MEMORY_RUNNING_LOW</code> 应用程序正在运行，并且处于非killable状态，此时设备内存很低（much lower），需要释放没用的资源</li>
+<li><code>TRIM_MEMORY_RUNNING_CRITICAL</code> 应用程序正在运行，但是系统已杀死LRU缓存中的大部分进程，此时需要释放所有不至关重要的资源。如果系统不能回收足够的内存，就会清掉LRU中所有的进程以及服务进程。</li>
+</ul>
+<p>进程在LRU缓存中：</p>
+<ul>
+<li><code>TRIM_MEMORY_BACKGROUND</code> 系统低内存下运行，程序进程位于LRU缓存列表的开头位置。虽然程序进程被kill的概率不大，但是系统可能正在杀LRU中的进程。你需要释放容易恢复的资源以便程序进程还在LRU list中，当从其他App返回时，能快速恢复现场。</li>
+<li><code>TRIM_MEMORY_MODERATE</code> 系统低内存下运行，程序进程位于LRU缓存列表的中间位置。你的进程被杀掉的可能性变大。</li>
+<li><code>TRIM_MEMORY_COMPLETE</code> 系统低内存下运行，程序进程最先容易被系统杀死。你需要释放所有对于恢复程序状态不至关重要的资源。</li>
+</ul>
+<p>API14开始有<code>onTrimMemory()</code>回调；API 14以下使用的是<code>onLowMemory()</code>，等价于<code>TRIM_MEMORY_COMPLETE</code></p>
+<p>3.恰当使用Bitmap<br>加载bitmap时，尽量保证bitmap分辨率和屏幕分辨率匹配，对于大分辨率的bitmap需要进行压缩处理。</p>
+<p><img src="/uploads/2015/01/bitmap_2.3.x.png" alt=""></p>
+<p><img src="/uploads/2015/01/bitmap_3.0.png" alt=""></p>
+<p>（1） Android 2.3.x(API 10)及以下的系统<br>bitmap像素数据实际存储于native内存中，在java heap中只是保留对象的引用，因此在java heap中内部都显示同一个大小。内存回收需主动调用recycle()，GC失效<br>（2） 在Android 3.0(API 11)及以上的系统<br>bitmap像素数据存储于java heap中，无需主动调用recycle()，由GC管理内存。<br>（3） 通过内存分析工具调试bitmap内存时，在Android 3.0的系统上进行，因为大部分内存分析工具只能分析java内存</p>
+<p>4.使用<code>SparseArray</code>，<code>SparseBooleanArray</code>和<code>LongSparseArray</code>等优化的数据容器代替HashMap</p>
+<p>5.使用static const代替<code>enum</code></p>
+<p>6.非必要情况下，少用抽象</p>
+<p>7.对于序列化数据，使用nano protobuf</p>
+<p>8.尽量少使用依赖注入框架</p>
+<p>9.谨慎使用第三方库</p>
+<p>10.使用ProGuard去除不必要的代码</p>
+<p>11.apk打包签名时，使用zipalign工具对齐</p>
+<p>12.使用多进程<br>一般情况下，大多数应用程序都不需要使用多进程。只有对于需要在后台和前台同时运行，并且前后台单独管理的程序才涉及到多进程（如音乐播放器）。<br>使用多进程方法：</p>
+<pre><code>&lt;service android:name=&quot;.PlaybackService&quot;
+     android:process=&quot;:background&quot; /&gt;
+</code></pre><p>一个空进程占用大概1.4MB内存，如果在该进程中操作UI，内存占用将是原来的好几倍。因此如果使用多进程，一般一个进程用于UI，其他进程不要有任何UI相关操作。</p>
+<h3 id="u4E09_u3001_u68C0_u6D4B_u5185_u5B58_u4F7F_u7528_u60C5_u51B5"><a href="#u4E09_u3001_u68C0_u6D4B_u5185_u5B58_u4F7F_u7528_u60C5_u51B5" class="headerlink" title="三、检测内存使用情况"></a>三、检测内存使用情况</h3><p>1.分析Logcat信息</p>
+<pre><code>D/dalvikvm:&lt;GC_Reason&gt;&lt;Amount_freed&gt;,&lt;Heap_stats&gt;,&lt;External_memory_stats&gt;,&lt;Pause_time&gt;
+</code></pre><p>参数解释：</p>
+<ul>
+<li>GC_Reason  发生GC的原因（GC_CONCURRENT,GC_FOR_MALLOC,GC_HPROF_DUMP_HEAP,GC_EXPLICIT,GC_EXTERNAL_ALLOC）</li>
+<li>Amount_freed 垃圾回收释放的内存</li>
+<li>Heap_stats java堆内存可用百分比(number of live objects)/(total heap size)</li>
+<li>External_memory_stats  (amount of allocated memory)/(limit at which collection will occur)</li>
+<li>Pausing_time 取决于heap大小，对于并发操作可能会有2个pausing time</li>
+</ul>
+<p>2.利用Eclipse的DDMS视图自带的内存分析工具</p>
+<ul>
+<li>观察heap内存变化情况<br>DDMS -&gt; Update heap -&gt; Cause GC</li>
+<li>跟踪内存分配情况<br>DDMS -&gt; Allocation Tracker -&gt; Start Tracking -&gt; GetAllocations<br>跟踪内存分配的方法，可用定位到具体某个实例，某个线程，某个类，某个文件和某一行。</li>
+</ul>
+<p>3.使用adb命令行</p>
+<pre><code>adb shell dumpsys meminfo &lt;package_name&gt;
+</code></pre><p><img src="/uploads/2015/01/memory_usage_info.png" alt=""></p>
+<p>4.使用MAT内存分析工具<br>下载eclipse插件memory analyze tool<br>操作DDMS -&gt; Dump HPROF file -&gt; save,分析Histigram view和Dominator tree内容。</p>
+<p><img src="/uploads/2015/01/shallow_heap_and_retained_heap.png" alt=""></p>
+<p>重要概念：shallow heap和retained heap</p>
+<ul>
+<li>shallow heap 对象本身占用内存大小</li>
+<li>retained heap 通过释放这个对象总共可以回收的内存</li>
+</ul>
+<h3 id="u56DB_u3001_u5185_u5B58_u6CC4_u6F0F"><a href="#u56DB_u3001_u5185_u5B58_u6CC4_u6F0F" class="headerlink" title="四、内存泄漏"></a>四、内存泄漏</h3><p>1.GC原理</p>
+<p><img src="/uploads/2015/01/gc_0.png" alt=""><br><img src="/uploads/2015/01/gc_1.png" alt=""></p>
+<p>GC会选择一些还存活的对象作为内存遍历的根节点GC Roots（如thread stack中的变量，JNI中的全局变量，zygote中的class loader对象等），对heap进行遍历，没有被直接或间接遍历到的引用会被GC回收，能被遍历到的不能被回收。<br>内存泄露：某些不再使用的对象被GC Roots引用，导致不能回收，使实际可使用内存变小。</p>
+<p>2.引起内存泄露的因素<br>（1）长时间保持对<code>Activity</code>,<code>Context</code>,<code>View</code>,<code>Drawable</code>和其他对象的引用<br>（2）非静态内部类<br>（3）持有对象的时间超出需要的时间</p>
+<p>3.常见的内存泄露<br>（1）非静态内部类的静态实例<br>（2）<code>Activity</code>使用静态成员<br>（3）<code>Handler</code>、<code>HandlerThread</code>使用时的问题<br>（4）register某个对象后缺少对应的unregister操作<br>（5）集合对象未清理，资源对象未关闭<br>（6）Dialog或PopupWindow未关闭引起的window leak<br>（7）不良代码造成的压力。如Bitmap使用不当；构造adapter时，没有使用缓存的convertView;在循环方法中创建对象。</p>
+<p>4.改进建议</p>
+<ul>
+<li>与View无关的操作尽量使用Application Context</li>
+<li>使用静态内部类</li>
+<li>灵活使用弱引用<code>WeakReference</code></li>
+<li>对对象的持有时间不要超过其生命周期</li>
+</ul>
+<h3 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h3><p>1.<a href="https://developer.android.com/tools/debugging/debugging-memory.html#TriggerLeaks" target="_blank" rel="external">triggerLeaks</a></p>
+<p>2.<a href="https://developer.android.com/training/articles/memory.html" target="_blank" rel="external">memory</a></p>
+<p>3.<a href="http://csdn.net/gemmem/article/details/8920039/" target="_blank" rel="external">memory ref1</a></p>
+<p>4.<a href="http://blog.csdn.net/gemmem/article/details/13017999/" target="_blank" rel="external">memory ref2</a></p>
+<p>5.Google IO 2011: Memory management for Android Apps “Google IO 2011”</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2015年12月10日 - 10时45分</p>
+        <p><span>最后更新:</span>2016年03月18日 - 09时56分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/10/AndroidMemoryManangement-md/" title="Android内存管理">http://chenyuanming.cn/2015/12/10/AndroidMemoryManangement-md/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2015/12/10/AndroidMemoryManangement-md/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/10/android-json2java-1-4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          android json2java 1.4
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/10/Json2Java-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JSON转JavaBean工具</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E00_u3001Android_u7CFB_u7EDF_u5185_u5B58_u7BA1_u7406_u673A_u5236"><span class="toc-number">1.</span> <span class="toc-text">一、Android系统内存管理机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8C_u3001Android_App_u4E2D_u5185_u5B58_u7BA1_u7406_u4F18_u5316"><span class="toc-number">2.</span> <span class="toc-text">二、Android App中内存管理优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E09_u3001_u68C0_u6D4B_u5185_u5B58_u4F7F_u7528_u60C5_u51B5"><span class="toc-number">3.</span> <span class="toc-text">三、检测内存使用情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u56DB_u3001_u5185_u5B58_u6CC4_u6F0F"><span class="toc-number">4.</span> <span class="toc-text">四、内存泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">5.</span> <span class="toc-text">参考文档</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/10/android-json2java-1-4/" title="上一篇: android json2java 1.4">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/10/Json2Java-md/" title="下一篇: JSON转JavaBean工具">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

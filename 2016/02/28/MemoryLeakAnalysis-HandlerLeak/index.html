@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MemoryLeakAnalysis-Handler导致的内存泄露 | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MemoryLeakAnalysis-Handler导致的内存泄露">
+<meta property="og:url" content="http://chenyuanming.cn/2016/02/28/MemoryLeakAnalysis-HandlerLeak/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:image" content="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-1.png?imageView/2/w/800/">
+<meta property="og:image" content="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-2.png?imageView/2/w/800/">
+<meta property="og:image" content="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-3.png?imageView/2/w/800/">
+<meta property="og:image" content="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-1-1.png?imageView/2/w/800/">
+<meta property="og:image" content="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-2-1.png?imageView/2/w/800/">
+<meta property="og:image" content="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-3-1.png?imageView/2/w/800/">
+<meta property="og:updated_time" content="2016-03-25T06:55:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MemoryLeakAnalysis-Handler导致的内存泄露">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-MemoryLeakAnalysis-HandlerLeak" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/" class="article-date">
+      <time datetime="2016-02-28T08:07:32.000Z" itemprop="datePublished">2016-02-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MemoryLeakAnalysis-Handler导致的内存泄露
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a></p>
+<h2 id="u4EE3_u7801_u793A_u4F8B"><a href="#u4EE3_u7801_u793A_u4F8B" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> info.enjoycode.handlerleak;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Handler;</span><br><span class="line"><span class="keyword">import</span> android.os.Message;</span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MainActivity"</span>;</span><br><span class="line">  Handler mHandler = <span class="keyword">new</span> Handler()&#123;</span><br><span class="line">      <span class="annotation">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">          Log.d(TAG, <span class="string">"handleMessage() called with: "</span> + <span class="string">"msg = ["</span> + msg + <span class="string">"]"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="annotation">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">      setContentView(R.layout.activity_main);</span><br><span class="line">      Log.d(TAG, <span class="string">"onCreate() called with: "</span> + <span class="string">"savedInstanceState = ["</span> + savedInstanceState + <span class="string">"]"</span>);</span><br><span class="line">      mHandler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">          <span class="annotation">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">              Log.d(TAG, <span class="string">"run() called with: "</span> + <span class="string">""</span>);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,<span class="number">60000</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u6A21_u62DF_u5185_u5B58_u6CC4_u9732_uFF0C_u73B0_u8C61_u521D_u6B65_u5206_u6790"><a href="#u6A21_u62DF_u5185_u5B58_u6CC4_u9732_uFF0C_u73B0_u8C61_u521D_u6B65_u5206_u6790" class="headerlink" title="模拟内存泄露，现象初步分析"></a>模拟内存泄露，现象初步分析</h2><ul>
+<li>摇晃5次以后控制台输出</li>
+</ul>
+<p><img src="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-1.png?imageView/2/w/800/" alt=""></p>
+<ul>
+<li><p>可以看出，MainActivity，Handler,Runnable对象泄露了6次<br><img src="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-2.png?imageView/2/w/800/" alt=""></p>
+</li>
+<li><p>经过60秒后，MainActivity，Handler还是6次，Runnable对象已经回收了。</p>
+</li>
+</ul>
+<p><img src="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-3.png?imageView/2/w/800/" alt=""></p>
+<h2 id="u6362_u4E2A_u59FF_u52BF_u770B_u95EE_u9898"><a href="#u6362_u4E2A_u59FF_u52BF_u770B_u95EE_u9898" class="headerlink" title="换个姿势看问题"></a>换个姿势看问题</h2><ul>
+<li>Actions-Histogram-选中需要分析的包<br><img src="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-1-1.png?imageView/2/w/800/" alt=""></li>
+<li>通过下图可以看到Handler和Runnable对象60秒内都存在的<br><img src="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-2-1.png?imageView/2/w/800/" alt=""></li>
+<li>下面的图是60秒以后<br><img src="http://7xp6j3.com1.z0.glb.clouddn.com/memory-leak-handler-3-1.png?imageView/2/w/800/" alt=""></li>
+</ul>
+<h2 id="u51FA_u73B0_u539F_u56E0"><a href="#u51FA_u73B0_u539F_u56E0" class="headerlink" title="出现原因"></a>出现原因</h2><h3 id="u6392_u961F_u4E2D_u7684Message_u5BF9_u8C61_u5BF9Handler_u7684_u6301_u6709_u5BFC_u81F4_u6CC4_u6F0F"><a href="#u6392_u961F_u4E2D_u7684Message_u5BF9_u8C61_u5BF9Handler_u7684_u6301_u6709_u5BFC_u81F4_u6CC4_u6F0F" class="headerlink" title="排队中的Message对象对Handler的持有导致泄漏"></a>排队中的Message对象对Handler的持有导致泄漏</h3><ul>
+<li>当Android程序第一次创建的时候，在主线程同时会创建一个Looper对象。Looper实现了一个简单的消息队列，一个接着一个处理Message对象。程序框架所有主要的事件（例如：屏幕上的点击时间，Activity生命周期的方法等等）都包含在Message对象中，然后添加到Looper的消息队列中，一个一个处理。主线程的Looper存在整个应用程序的生命周期内。</li>
+<li>当一个Handler对象在主线程中创建的时候，它会关联到Looper的 message queue 。Message添加到消息队列中的时候Message会持有当前Handler引用，当Looper处理到当前消息的时候，会调用Handler#handleMessage(Message).</li>
+<li>在java中，no-static的内部类会 隐式的 持有当前类的一个引用。static的类则没有。</li>
+</ul>
+<h3 id="handler__u5F15_u7528_Activity__u963B_u6B62_u4E86GC_u5BF9Acivity_u7684_u56DE_u6536"><a href="#handler__u5F15_u7528_Activity__u963B_u6B62_u4E86GC_u5BF9Acivity_u7684_u56DE_u6536" class="headerlink" title="handler 引用 Activity 阻止了GC对Acivity的回收"></a>handler 引用 Activity 阻止了GC对Acivity的回收</h3><ul>
+<li>在Java中，非静态(匿名)内部类会默认隐性引用外部类对象。而静态内部类不会引用外部类对象。</li>
+<li><p>如果外部类是Activity，则会引起Activity泄露 。</p>
+<p>当Activity finish后，延时消息会继续存在主线程消息队列中1分钟，然后处理消息。而该消息引用了Activity的Handler对象，然后这个Handler又引用了这个Activity。这些引用对象会保持到该消息被处理完，这样就导致该Activity对象无法被回收，从而导致了上面说的 Activity泄露。</p>
+</li>
+<li>Handler的实现类采用静态内部类的方式，避免对外部类的强引用，在其内部声明一个WeakReference引用到外部类的实例。</li>
+</ul>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p><a href="http://www.jianshu.com/p/5acb7146371b" target="_blank" rel="external">Android 开发进阶之『清除应用中的内存泄漏』</a></p>
+<p><a href="http://www.jianshu.com/p/bfb9a40a16e5" target="_blank" rel="external">高效地分析Android内存–MAT工具解析</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2016年02月28日 - 16时07分</p>
+        <p><span>最后更新:</span>2016年03月25日 - 14时55分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/" title="MemoryLeakAnalysis-Handler导致的内存泄露">http://chenyuanming.cn/2016/02/28/MemoryLeakAnalysis-HandlerLeak/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2016/02/28/MemoryLeakAnalysis-HandlerLeak/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2016/03/20/rxjava-note/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RxJava学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4EE3_u7801_u793A_u4F8B"><span class="toc-number">1.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6A21_u62DF_u5185_u5B58_u6CC4_u9732_uFF0C_u73B0_u8C61_u521D_u6B65_u5206_u6790"><span class="toc-number">2.</span> <span class="toc-text">模拟内存泄露，现象初步分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6362_u4E2A_u59FF_u52BF_u770B_u95EE_u9898"><span class="toc-number">3.</span> <span class="toc-text">换个姿势看问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51FA_u73B0_u539F_u56E0"><span class="toc-number">4.</span> <span class="toc-text">出现原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6392_u961F_u4E2D_u7684Message_u5BF9_u8C61_u5BF9Handler_u7684_u6301_u6709_u5BFC_u81F4_u6CC4_u6F0F"><span class="toc-number">4.1.</span> <span class="toc-text">排队中的Message对象对Handler的持有导致泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#handler__u5F15_u7528_Activity__u963B_u6B62_u4E86GC_u5BF9Acivity_u7684_u56DE_u6536"><span class="toc-number">4.2.</span> <span class="toc-text">handler 引用 Activity 阻止了GC对Acivity的回收</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ref"><span class="toc-number">5.</span> <span class="toc-text">ref</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/20/rxjava-note/" title="上一篇: RxJava学习笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/" title="下一篇: MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

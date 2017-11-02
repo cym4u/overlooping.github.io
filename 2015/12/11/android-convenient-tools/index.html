@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android便捷工具 | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android便捷工具">
+<meta property="og:url" content="http://chenyuanming.cn/2015/12/11/android-convenient-tools/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/sdk-manager.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/reload-sdk.png">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/QQ截图20150119120539.jpg">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/2015/01/email.jpg">
+<meta property="og:updated_time" content="2016-03-18T01:56:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android便捷工具">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-android-convenient-tools" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/11/android-convenient-tools/" class="article-date">
+      <time datetime="2015-12-11T07:43:24.000Z" itemprop="datePublished">2015-12-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android便捷工具
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a></p>
+<h3 id="Google_u88AB_u5C4F_u853D_u540E_u53EF_u7528_u7684_u955C_u50CF_u7F51_u7AD9"><a href="#Google_u88AB_u5C4F_u853D_u540E_u53EF_u7528_u7684_u955C_u50CF_u7F51_u7AD9" class="headerlink" title="Google被屏蔽后可用的镜像网站"></a>Google被屏蔽后可用的镜像网站</h3><p><a href="https://wen.lu/" target="_blank" rel="external">https://wen.lu/</a></p>
+<p><a href="http://guge.io/" target="_blank" rel="external">http://guge.io/</a></p>
+<p><a href="http://www.gfsoso.com/" target="_blank" rel="external">http://www.gfsoso.com/</a></p>
+<h3 id="u5404_u79CD_u7EFC_u5408_u670D_u52A1"><a href="#u5404_u79CD_u7EFC_u5408_u670D_u52A1" class="headerlink" title="各种综合服务"></a>各种综合服务</h3><p>聚合数据：<a href="https://www.juhe.cn/" target="_blank" rel="external">https://www.juhe.cn/</a></p>
+<p>百度api聚合服务：<a href="http://apistore.baidu.com/" target="_blank" rel="external">http://apistore.baidu.com/</a></p>
+<p>devstore <a href="http://www.devstore.cn/" target="_blank" rel="external">http://www.devstore.cn/</a></p>
+<h3 id="u4E0D_u6302vpn_u66F4_u65B0sdk"><a href="#u4E0D_u6302vpn_u66F4_u65B0sdk" class="headerlink" title="不挂vpn更新sdk"></a>不挂vpn更新sdk</h3><p><strong>Android SDK Manager–Tools–Options…</strong></p>
+<pre><code>1. Http Proxy Server:203.208.46.146
+2. Http Proxy Port:80
+3. 勾选：Force https://..sources to be feteched using http://...
+</code></pre><p><img src="/uploads/2015/01/sdk-manager.png" alt="配置sdk"><br><strong>Reoload SDK</strong><br><img src="/uploads/2015/01/reload-sdk.png" alt="Reload SDK"><br> <strong>现在就可以Happy的更新了</strong></p>
+<h3 id="u56FE_u7247_u538B_u7F29"><a href="#u56FE_u7247_u538B_u7F29" class="headerlink" title="图片压缩"></a>图片压缩</h3><p>tinypng：<a href="https://tinypng.com/" target="_blank" rel="external">https://tinypng.com/</a></p>
+<p><img src="/uploads/2015/01/QQ截图20150119120539.jpg" alt="demo"></p>
+<h3 id="u4E0D_u7528_u6CE8_u518C_u5C31_u53EF_u4EE5_u4F7F_u7528_u7684_u90AE_u4EF6_u5730_u5740_uFF0C_u6CE8_u518C_u4E00_u6B21_u6027_u7F51_u7AD9_u53EF_u7528"><a href="#u4E0D_u7528_u6CE8_u518C_u5C31_u53EF_u4EE5_u4F7F_u7528_u7684_u90AE_u4EF6_u5730_u5740_uFF0C_u6CE8_u518C_u4E00_u6B21_u6027_u7F51_u7AD9_u53EF_u7528" class="headerlink" title="不用注册就可以使用的邮件地址，注册一次性网站可用"></a>不用注册就可以使用的邮件地址，注册一次性网站可用</h3><p><a href="https://www.guerrillamail.com：[https://www.guerrillamail.com](https://www.guerrillamail.com" target="_blank" rel="external">https://www.guerrillamail.com：[https://www.guerrillamail.com](https://www.guerrillamail.com</a>)</p>
+<p><img src="/uploads/2015/01/email.jpg" alt="demo"></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/11/android-convenient-tools/">android便捷工具</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2015年12月11日 - 15时43分</p>
+        <p><span>最后更新:</span>2016年03月18日 - 09时56分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/11/android-convenient-tools/" title="android便捷工具">http://chenyuanming.cn/2015/12/11/android-convenient-tools/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2015/12/11/android-convenient-tools/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/11/android-qq-backgroud-keep-alive/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          手机QQ后台为何清不掉
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/11/android-multidex/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DEX 方法超过64K限制和gradle编译OOM问题解决</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Google_u88AB_u5C4F_u853D_u540E_u53EF_u7528_u7684_u955C_u50CF_u7F51_u7AD9"><span class="toc-number">1.</span> <span class="toc-text">Google被屏蔽后可用的镜像网站</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5404_u79CD_u7EFC_u5408_u670D_u52A1"><span class="toc-number">2.</span> <span class="toc-text">各种综合服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E0D_u6302vpn_u66F4_u65B0sdk"><span class="toc-number">3.</span> <span class="toc-text">不挂vpn更新sdk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u56FE_u7247_u538B_u7F29"><span class="toc-number">4.</span> <span class="toc-text">图片压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E0D_u7528_u6CE8_u518C_u5C31_u53EF_u4EE5_u4F7F_u7528_u7684_u90AE_u4EF6_u5730_u5740_uFF0C_u6CE8_u518C_u4E00_u6B21_u6027_u7F51_u7AD9_u53EF_u7528"><span class="toc-number">5.</span> <span class="toc-text">不用注册就可以使用的邮件地址，注册一次性网站可用</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/11/android-qq-backgroud-keep-alive/" title="上一篇: 手机QQ后台为何清不掉">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/11/android-multidex/" title="下一篇: DEX 方法超过64K限制和gradle编译OOM问题解决">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

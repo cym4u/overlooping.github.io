@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Material Design TextInputLayout | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Material Design TextInputLayout">
+<meta property="og:url" content="http://chenyuanming.cn/2015/12/23/android Material-Design-TextInputLayout/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:image" content="https://cms-assets.tutsplus.com/uploads/users/845/posts/24168/image/second_screen.jpg">
+<meta property="og:image" content="https://cms-assets.tutsplus.com/uploads/users/845/posts/24168/image/first_screen.jpg">
+<meta property="og:updated_time" content="2016-03-24T06:00:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Material Design TextInputLayout">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-android Material-Design-TextInputLayout" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/23/android Material-Design-TextInputLayout/" class="article-date">
+      <time datetime="2015-12-23T12:40:19.000Z" itemprop="datePublished">2015-12-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Material Design TextInputLayout
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a></p>
+<h2 id="u4F7F_u7528TextInputLayout_u521B_u5EFA_u4E00_u4E2A_u767B_u9646_u754C_u9762"><a href="#u4F7F_u7528TextInputLayout_u521B_u5EFA_u4E00_u4E2A_u767B_u9646_u754C_u9762" class="headerlink" title="使用TextInputLayout创建一个登陆界面"></a>使用TextInputLayout创建一个登陆界面</h2><h3 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h3><p>Google在2015的IO大会上，给我们带来了更加详细的Material Design设计规范，同时，也给我们带来了全新的Android Design Support Library，在这个support库里面，Google给我们提供了更加规范的MD设计风格的控件。最重要的是，Android Design Support Library的兼容性更广，直接可以向下兼容到Android 2.2。这不得不说是一个良心之作。</p>
+<h3 id="u4F7F_u7528TextInputLayout"><a href="#u4F7F_u7528TextInputLayout" class="headerlink" title="使用TextInputLayout"></a>使用TextInputLayout</h3><ul>
+<li>创建一个新的工程<br>在Android Studio中，从File菜单中，选择New &gt; New project ，填入必要的信息配置并创建工程。在我的实例中使用了API 7，这个是Design Support Library支持的最低等级。这样设置，可以让你的设备尽可能运行在更多设备上，我已经把<code>MainActivity</code>改成<code>LoginActivity</code>，布局文件<code>activity_login.xml</code>。<br>工程设置号以后，去掉自动生成的<code>onCreateOptionsMenu()</code>和<code>onOptionsItemSelected ()</code>，同时删除res/menu下面对应的xml(因为用不到menu这块)。</li>
+<li>导入支持库<br>使用TextInputLayout 控件需要导入两个库，一个是appcompat-v7，保证material styles可以向下兼容。另一个是Design Support Library。<br>在项目的build.gradle文件中，添加下面的依赖(dependencies):<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">	<span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</span><br><span class="line">	<span class="keyword">compile</span> <span class="string">'com.android.support:design:22.2.0'</span></span><br><span class="line">	<span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:22.2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果gralde没有自动要求同步(synchronize)工程，从build菜单选择<code>Make module &#39;app&#39;</code>或者按<code>F9</code>,这样AS会自动获取必要的资源。</p>
+<h3 id="u8BBE_u8BA1UI"><a href="#u8BBE_u8BA1UI" class="headerlink" title="设计UI"></a>设计UI</h3><p>UI很简单，一个welcome的标签（后期可以很方便的替换成图片）和两个EditText （用户名，密码框），不居中再加上一个登陆按钮。再选个漂亮的背景色。<br>另一个需要注意的细节是设置好两个输入框的inputType ，第一个框设置为textEmail ，第二个框设置为textPassword，布局如下所示。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">linearlayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">    <span class="attribute">android:background</span>=<span class="value">"#e3e3e3"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:padding</span>=<span class="value">"@dimen/activity_horizontal_margin"</span></span><br><span class="line">    <span class="attribute">tools:context</span>=<span class="value">".LoginActivity"</span></span><br><span class="line">    <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">relativelayout</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_weight</span>=<span class="value">"0.5"</span></span><br><span class="line">        <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">textview</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">            <span class="attribute">android:layout_centerInParent</span>=<span class="value">"true"</span></span><br><span class="line">            <span class="attribute">android:gravity</span>=<span class="value">"center"</span></span><br><span class="line">            <span class="attribute">android:text</span>=<span class="value">"Welcome"</span></span><br><span class="line">            <span class="attribute">android:textSize</span>=<span class="value">"30sp"</span></span><br><span class="line">            <span class="attribute">android:textColor</span>=<span class="value">"#333333"</span>&gt;</span><span class="tag">&lt;/<span class="title">textview</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">relativelayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">linearlayout</span>&gt;</span><span class="tag">&lt;<span class="title">linearlayout</span> <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_weight</span>=<span class="value">"0.5"</span></span><br><span class="line">        <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">edittext</span> <span class="attribute">android:id</span>=<span class="value">"@+id/username"</span></span><br><span class="line">            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">            <span class="attribute">android:inputType</span>=<span class="value">"textEmailAddress"</span>&gt;</span><span class="tag">&lt;/<span class="title">edittext</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">edittext</span> <span class="attribute">android:id</span>=<span class="value">"@+id/password"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                <span class="attribute">android:inputType</span>=<span class="value">"textPassword"</span>&gt;</span><span class="tag">&lt;/<span class="title">edittext</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">button</span> <span class="attribute">android:id</span>=<span class="value">"@+id/btn"</span></span><br><span class="line">            <span class="attribute">android:layout_marginTop</span>=<span class="value">"4dp"</span></span><br><span class="line">            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">            <span class="attribute">android:text</span>=<span class="value">"Login"</span>&gt;</span><span class="tag">&lt;/<span class="title">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">linearlayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>你可能还想去掉应用栏(app bar),也就是之前说的action bar，修改下style.xml就可以了<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"AppTheme"</span> <span class="attribute">parent</span>=<span class="value">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="css"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>使用TextInputLayout<br>终于到了教程中最有趣的部分了，TextInputLayout 控件表现得就像LinearLayout 一样，它是一个容器。TextInputLayout 中只能放一个子元素，和ScrollView有点类似，并且子元素必须是EditText 。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">android</span> <span class="attribute">.support.design.widget.TextInputLayout</span></span><br><span class="line">    <span class="attribute">android:id</span>=<span class="value">"@+id/usernameWrapper"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">edittext</span> <span class="attribute">android:id</span>=<span class="value">"@+id/username"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:inputType</span>=<span class="value">"textEmailAddress"</span></span><br><span class="line">        <span class="attribute">android:hint</span>=<span class="value">"Username"</span>&gt;</span><span class="tag">&lt;/<span class="title">edittext</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意到了么，我在EditText设置一个属性-hint。这个属性大家都很熟悉了，EditText没有输入的时候，hint会显示，当输入第一个字母上去的时候，hint就消失了。这个体验不是太好。<br>感谢TextInputLayout，这个马上就不是问题了。当EditText中输入第一个字母要隐藏hint的时候，TextInputLayout中会出现一个悬浮的标签来显示这个hint，还负责一个炫酷的的material 动画。<br>下面，我们给password也来一个。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">android</span> <span class="attribute">.support.design.widget.TextInputLayout</span></span><br><span class="line">    <span class="attribute">android:id</span>=<span class="value">"@+id/passwordWrapper"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">    <span class="attribute">android:layout_below</span>=<span class="value">"@id/usernameWrapper"</span></span><br><span class="line">    <span class="attribute">android:layout_marginTop</span>=<span class="value">"4dp"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">edittext</span> <span class="attribute">android:id</span>=<span class="value">"@+id/password"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:inputType</span>=<span class="value">"textPassword"</span></span><br><span class="line">        <span class="attribute">android:hint</span>=<span class="value">"Password"</span>&gt;</span><span class="tag">&lt;/<span class="title">edittext</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">android</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果现在运行程序，啥效果都木有。当然，EditText 的hint效果除外。辣么，为啥会木有动画捏？我们还缺了点代码。</p>
+<ul>
+<li>设置提示信息(hints)<br>在<code>setContentView()</code>下面，初始化TextInputLayout 的引用。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);</span><br><span class="line"><span class="keyword">final</span> TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>想要看到hint浮动的动画，还需要调用<code>setHint</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">usernameWrapper.setHint(<span class="string">"Username"</span>);</span><br><span class="line">passwordWrapper.setHint(<span class="string">"Password"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>做完这个以后，这个应用已经完全符合material design了，运行程序，然后你会看到登录界面。<br><img src="https://cms-assets.tutsplus.com/uploads/users/845/posts/24168/image/second_screen.jpg" alt="enter image description here"></p>
+<h3 id="u5904_u7406_u9519_u8BEF"><a href="#u5904_u7406_u9519_u8BEF" class="headerlink" title="处理错误"></a>处理错误</h3><p>TextInputLayout另一个很赞的功能是，可以处理错误情况。通过验证用户输入，你可以防止用户输入错误的邮箱，或者输入不符合规则的密码。<br>有些输入验证，验证是在后台做得，产生错误后会反馈给前台，最后展示给用户。非常耗时而且用户体验差。最好的办法是在请求后台前做校验。</p>
+<ul>
+<li>实现onClick 方法<br>首先处理点击事件，处理点击事件的方法也有很多种，在XML中设置方法名，然后Activity完善这个方法。或者setOnClickListener。写文章的哥们儿比较喜欢后面这种。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">btn.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// STUB</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其实，当这个方法被调用以后，就不需要键盘了。但是不幸的是，Android不会自动隐藏。怎么办呢？调用下面的方法吧。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">hideKeyboard</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    View view = getCurrentFocus();</span><br><span class="line">    <span class="keyword">if</span> (view != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).</span><br><span class="line">            hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>验证用户输入<br>在设置错误标签前，我们先明确下什么是错误，什么不是错误。我们假设用户名验证邮箱是否正确。<br>验证邮箱稍微有些复杂，我们可以用Apache Commons library 来做这个事。我这里用一个维基百科里的正则表达式。</p>
+<pre><code>/^[a-zA-Z0-9#_~!$&amp;&apos;()*+,;=:.&quot;(),:;&lt;&gt;@\[\]\\]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/
+</code></pre><p>为啥这么写，就不做解释了。。。。。<br>既然我们想验证一个string，我们必须依赖Pattern and Matcher，它们在java.util.regex下面。在Activity中导入它们。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String EMAIL_PATTERN = <span class="string">"^[a-zA-Z0-9#_~!$&amp;'()*+,;=:.\"(),:;&lt;&gt;@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"</span>;</span><br><span class="line"><span class="keyword">private</span> Pattern pattern = Pattern.compile(EMAIL_PATTERN);</span><br><span class="line"><span class="keyword">private</span> Matcher matcher;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validateEmail</span><span class="params">(String email)</span> </span>&#123;</span><br><span class="line">    matcher = pattern.matcher(email);</span><br><span class="line">    <span class="keyword">return</span> matcher.matches();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>密码验证相对简单，不同的组织有不同的验证方式。但是大都有最小长度限制。最合理的规则就是至少输入六位字符。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validatePassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> password.length() &gt; <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>接收数据<br>之前已说过，TextInputLayout只是一个容器。不像LinearLayout and ScrollView,你可以直接获取它的子元素通过特定的方法(getEditText)。根本木有必要使用findViewById。<br>如果TextInputLayout 中没有EditText，getEditText 会返回null，你得注意下NPE了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">    hideKeyboard();</span><br><span class="line"></span><br><span class="line">    String username = usernameWrapper.getEditText().getText().toString();</span><br><span class="line">    String password = usernameWrapper.getEditText().getText().toString();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Checks</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Login</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示错误<br>TextInputLayout 错误处理简单而迅速。相关的方法有<code>setErrorEnabled</code>和<code>setError</code>。<br>setError会弹出红色的提示消息同时显示在EditText下面，如果传入的错误消息是null，之前的消息会被清除掉。这个方法还会使EditText 也变红色。<br>setErrorEnabled 是控制这个功能的。这会直接影响layout的大小。请自行脑补。。。。<br>还有一个需要注意的是，如果没有调用setErrorEnabled(true)但是调用了setError 方法并且传入了非空的消息，setErrorEnabled(true) 会被自动调用。</p>
+</li>
+</ul>
+<p>正确和错误情况我们已经说明了，下面就实现onClick 方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">    hideKeyboard();</span><br><span class="line">    String username = usernameWrapper.getEditText().getText().toString();</span><br><span class="line">    String password = usernameWrapper.getEditText().getText().toString();</span><br><span class="line">    <span class="keyword">if</span> (!validateEmail(username)) &#123;</span><br><span class="line">        usernameWrapper.setError(<span class="string">"Not a valid email address!"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!validatePassword(password)) &#123;</span><br><span class="line">        passwordWrapper.setError(<span class="string">"Not a valid password!"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        usernameWrapper.setErrorEnabled(<span class="keyword">false</span>);</span><br><span class="line">        passwordWrapper.setErrorEnabled(<span class="keyword">false</span>);</span><br><span class="line">        doLogin();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面是空的登录方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doLogin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Toast.makeText(getApplicationContext(), <span class="string">"OK! I'm performing login."</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> login procedure; not within the scope of this tutorial.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>修改TextInputLayout背景<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"AppTheme"</span> <span class="attribute">parent</span>=<span class="value">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="css"></span><br><span class="line">    &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="tag">colorAccent</span>"&gt;<span class="id">#3498db</span>&lt;/<span class="tag">item</span>&gt;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://cms-assets.tutsplus.com/uploads/users/845/posts/24168/image/first_screen.jpg" alt="enter image description here"></p>
+<h3 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h3><p>感谢Design Support Library给我们带来了TextInputLayout。</p>
+<p>下面的不想翻译了，好好学习，天天向上吧。</p>
+<p>The design paradigm that this widget implements allows users to never never lose context of the information they are entering and it was actually introduced by Google last year, along with Material Design.</p>
+<p>At that time, there was no support library giving developers the possibility to put this widget into action in their projects, until Google I/O 2015. Now, if your application expects some sort of data input, you will finally be truly material design compliant.</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2015年12月23日 - 20时40分</p>
+        <p><span>最后更新:</span>2016年03月24日 - 14时00分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/23/android Material-Design-TextInputLayout/" title="Material Design TextInputLayout">http://chenyuanming.cn/2015/12/23/android Material-Design-TextInputLayout/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2015/12/23/android Material-Design-TextInputLayout/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/24/android-git-gradle-Jenkins-compile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Windows下Jenkins+Git+Gradle实现android开发持续集成、打包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/22/Git Authoritative Guide Note/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git权威指南阅读笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4F7F_u7528TextInputLayout_u521B_u5EFA_u4E00_u4E2A_u767B_u9646_u754C_u9762"><span class="toc-number">1.</span> <span class="toc-text">使用TextInputLayout创建一个登陆界面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4ECB_u7ECD"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528TextInputLayout"><span class="toc-number">1.2.</span> <span class="toc-text">使用TextInputLayout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BBE_u8BA1UI"><span class="toc-number">1.3.</span> <span class="toc-text">设计UI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5904_u7406_u9519_u8BEF"><span class="toc-number">1.4.</span> <span class="toc-text">处理错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u603B_u7ED3"><span class="toc-number">1.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/24/android-git-gradle-Jenkins-compile/" title="上一篇: Windows下Jenkins+Git+Gradle实现android开发持续集成、打包">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/22/Git Authoritative Guide Note/" title="下一篇: git权威指南阅读笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

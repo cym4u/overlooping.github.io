@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android-different-loading-animations动画加载分析 | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android-different-loading-animations动画加载分析">
+<meta property="og:url" content="http://chenyuanming.cn/2015/12/17/android-github-android-different-loading-animations-project-analysis/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/windows.gif">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/hangout.gif">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/left2right.gif">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/foursquare.gif">
+<meta property="og:image" content="http://chenyuanming.cn/uploads/horizontalincreamental.gif">
+<meta property="og:updated_time" content="2016-03-24T06:14:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android-different-loading-animations动画加载分析">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-android-github-android-different-loading-animations-project-analysis" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/" class="article-date">
+      <time datetime="2015-12-17T12:40:19.000Z" itemprop="datePublished">2015-12-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android-different-loading-animations动画加载分析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codes/">codes</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a></p>
+<h3 id="Demo_u5730_u5740"><a href="#Demo_u5730_u5740" class="headerlink" title="Demo地址"></a>Demo地址</h3><p>android-different-loading-animations动画加载分析<br>github地址：<a href="https://github.com/raweng/android-different-loading-animations" target="_blank" rel="external">https://github.com/raweng/android-different-loading-animations</a></p>
+<h3 id="windows_like"><a href="#windows_like" class="headerlink" title="windows like"></a>windows like</h3><p><img src="/uploads/windows.gif" alt="enter image description here"></p>
+<p>这个动画相关代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">windowsAnimation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> ValueAnimator valueTvOne_x = ObjectAnimator.ofFloat(windowsTvOne, <span class="string">"x"</span>, windowsTvOne.getX() - <span class="number">50</span>, (screenWidth / <span class="number">2</span>) + <span class="number">10f</span>, (screenWidth / <span class="number">2</span>) + <span class="number">25f</span>,(screenWidth / <span class="number">2</span>) + <span class="number">50f</span>, screenWidth * .<span class="number">94f</span>, screenWidth + <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">	valueTvOne_x.setDuration(<span class="number">5200</span>);</span><br><span class="line">	valueTvOne_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">	valueTvOne_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line"></span><br><span class="line">	valueTvOne_x.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">final</span> ValueAnimator valueTvTwo_x = ObjectAnimator.ofFloat(windowsTvTwo, <span class="string">"x"</span>, windowsTvTwo.getX() - <span class="number">50</span>, (screenWidth / <span class="number">2.1f</span>) + <span class="number">10f</span>, (screenWidth / <span class="number">2.1f</span>) + <span class="number">25f</span>, (screenWidth / <span class="number">2.1f</span>) + <span class="number">50f</span>, screenWidth * .<span class="number">94f</span>, screenWidth + <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">	valueTvTwo_x.setDuration(<span class="number">6000</span>);</span><br><span class="line">	valueTvTwo_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">	valueTvTwo_x.setStartDelay(<span class="number">200</span>);</span><br><span class="line">	valueTvTwo_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line"></span><br><span class="line">	valueTvTwo_x.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">final</span> ValueAnimator valueTvThree_x = ObjectAnimator.ofFloat(windowsTvThree, <span class="string">"x"</span>, windowsTvThree.getX() - <span class="number">50</span>, (screenWidth / <span class="number">2.2f</span>) + <span class="number">10f</span>, (screenWidth / <span class="number">2.2f</span>) + <span class="number">25f</span>, (screenWidth / <span class="number">2.2f</span>) + <span class="number">50f</span>, screenWidth * .<span class="number">94f</span>, screenWidth + <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">	valueTvThree_x.setDuration(<span class="number">6500</span>);</span><br><span class="line">	valueTvThree_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">	valueTvTwo_x.setStartDelay(<span class="number">500</span>);</span><br><span class="line">	valueTvThree_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line"></span><br><span class="line">	valueTvThree_x.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	windowsAnimatorSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">	windowsAnimatorSet.playTogether(valueTvTwo_x, valueTvThree_x, valueTvOne_x);</span><br><span class="line"></span><br><span class="line">	windowsAnimatorSet.start();</span><br><span class="line">	windowsAnimatorSet.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line">		<span class="annotation">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">			windowsAnimatorSet.start();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的地方是：</p>
+<ol>
+<li>三个小块移动的范围不一样 ，screenWidth / (2.0f或者2.1f或者2.2f)</li>
+<li>后面两个块有延时,200ms和500ms</li>
+<li>三个快移动的速度第一个最快，第三个最慢。这个是通过控制动画执行时间达到的(5200ms,6000ms,6500ms)</li>
+</ol>
+<h3 id="hangout_like"><a href="#hangout_like" class="headerlink" title="hangout like"></a>hangout like</h3><p><img src="/uploads/hangout.gif" alt="enter image description here"></p>
+<p>主要代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">waveAnimation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	PropertyValuesHolder tvOne_Y = PropertyValuesHolder.ofFloat(hangoutTvOne.TRANSLATION_Y, -<span class="number">40.0f</span>);</span><br><span class="line">	PropertyValuesHolder tvOne_X = PropertyValuesHolder.ofFloat(hangoutTvOne.TRANSLATION_X, <span class="number">0</span>);</span><br><span class="line">	waveOneAnimator = ObjectAnimator.ofPropertyValuesHolder(hangoutTvOne, tvOne_X, tvOne_Y);</span><br><span class="line">	waveOneAnimator.setRepeatCount(-<span class="number">1</span>);</span><br><span class="line">	waveOneAnimator.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">	waveOneAnimator.setDuration(<span class="number">300</span>);</span><br><span class="line">	waveOneAnimator.start();</span><br><span class="line"></span><br><span class="line">	PropertyValuesHolder tvTwo_Y = PropertyValuesHolder.ofFloat(hangoutTvTwo.TRANSLATION_Y, -<span class="number">40.0f</span>);</span><br><span class="line">	PropertyValuesHolder tvTwo_X = PropertyValuesHolder.ofFloat(hangoutTvTwo.TRANSLATION_X, <span class="number">0</span>);</span><br><span class="line">	waveTwoAnimator = ObjectAnimator.ofPropertyValuesHolder(hangoutTvTwo, tvTwo_X, tvTwo_Y);</span><br><span class="line">	waveTwoAnimator.setRepeatCount(-<span class="number">1</span>);</span><br><span class="line">	waveTwoAnimator.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">	waveTwoAnimator.setDuration(<span class="number">300</span>);</span><br><span class="line">	waveTwoAnimator.setStartDelay(<span class="number">100</span>);</span><br><span class="line">	waveTwoAnimator.start();</span><br><span class="line"></span><br><span class="line">	PropertyValuesHolder tvThree_Y = PropertyValuesHolder.ofFloat(hangoutTvThree.TRANSLATION_Y, -<span class="number">40.0f</span>);</span><br><span class="line">	PropertyValuesHolder tvThree_X = PropertyValuesHolder.ofFloat(hangoutTvThree.TRANSLATION_X, <span class="number">0</span>);</span><br><span class="line">	waveThreeAnimator = ObjectAnimator.ofPropertyValuesHolder(hangoutTvThree, tvThree_X, tvThree_Y);</span><br><span class="line">	waveThreeAnimator.setRepeatCount(-<span class="number">1</span>);</span><br><span class="line">	waveThreeAnimator.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">	waveThreeAnimator.setDuration(<span class="number">300</span>);</span><br><span class="line">	waveThreeAnimator.setStartDelay(<span class="number">200</span>);</span><br><span class="line">	waveThreeAnimator.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现分析：</p>
+<ol>
+<li>动画时间都是300ms</li>
+<li>第一个没有延时，第二个100ms，第三个延时200ms。这样就连贯起来了</li>
+</ol>
+<p> ###left2right like<br><img src="/uploads/left2right.gif" alt="enter image description here"></p>
+<p>主要代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">leftToRightToLeftMove</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">final</span> ValueAnimator valueTvOne_x = ObjectAnimator.ofFloat(leftRightTvOne, <span class="string">"x"</span>, leftRightTvOne.getX(), screenWidth * .<span class="number">9f</span>);</span><br><span class="line"></span><br><span class="line">	valueTvOne_x.setDuration(<span class="number">1000</span>);</span><br><span class="line">	valueTvOne_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">	valueTvOne_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">	valueTvOne_x.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">final</span> ValueAnimator valueTvTwo_x = ObjectAnimator.ofFloat(leftRightTvTwo, <span class="string">"x"</span>, leftRightTvTwo.getX(), screenWidth * .<span class="number">93f</span>);<span class="comment">//- 35);</span></span><br><span class="line"></span><br><span class="line">	valueTvTwo_x.setDuration(<span class="number">1000</span>);</span><br><span class="line">	valueTvTwo_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">	valueTvTwo_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">	valueTvTwo_x.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">final</span> ValueAnimator valueTvThree_x = ObjectAnimator.ofFloat(leftRightTvThree, <span class="string">"x"</span>, leftRightTvThree.getX(), screenWidth * .<span class="number">96f</span>);<span class="comment">// - 20);</span></span><br><span class="line"></span><br><span class="line">	valueTvThree_x.setDuration(<span class="number">1000</span>);</span><br><span class="line">	valueTvThree_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">	valueTvThree_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">	valueTvThree_x.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line"></span><br><span class="line">	animatorSet1 = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">	animatorSet1.playSequentially(valueTvOne_x, valueTvTwo_x, valueTvThree_x);</span><br><span class="line"></span><br><span class="line">	animatorSet1.start();</span><br><span class="line">	animatorSet1.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line"></span><br><span class="line">		<span class="annotation">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="annotation">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="annotation">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">			ValueAnimator valueTvOne_x = ObjectAnimator.ofFloat(leftRightTvOne, <span class="string">"x"</span>, leftRightTvOne.getX(), leftRightTvOne.getX() * .<span class="number">01f</span>);</span><br><span class="line"></span><br><span class="line">			valueTvOne_x.setDuration(<span class="number">1000</span>);</span><br><span class="line">			valueTvOne_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">			valueTvOne_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">			valueTvOne_x.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line"></span><br><span class="line">			<span class="keyword">final</span> ValueAnimator valueTvTwo_x = ObjectAnimator.ofFloat(leftRightTvTwo, <span class="string">"x"</span>, leftRightTvTwo.getX(), leftRightTvTwo.getX() * .<span class="number">03f</span>);</span><br><span class="line"></span><br><span class="line">			valueTvTwo_x.setDuration(<span class="number">1000</span>);</span><br><span class="line">			valueTvTwo_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">			valueTvTwo_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">			valueTvTwo_x.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line"></span><br><span class="line">			<span class="keyword">final</span> ValueAnimator valueTvThree_x = ObjectAnimator.ofFloat(leftRightTvThree, <span class="string">"x"</span>, leftRightTvThree.getX(), leftRightTvThree.getX() * .<span class="number">06f</span>);</span><br><span class="line"></span><br><span class="line">			valueTvThree_x.setDuration(<span class="number">1000</span>);</span><br><span class="line">			valueTvThree_x.setRepeatCount(<span class="number">0</span>);</span><br><span class="line">			valueTvThree_x.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">			valueTvThree_x.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</span><br><span class="line"></span><br><span class="line">			animatorSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">			animatorSet.playSequentially(valueTvThree_x, valueTvTwo_x, valueTvOne_x);</span><br><span class="line"></span><br><span class="line">			animatorSet.start();</span><br><span class="line">			animatorSet.addListener(<span class="keyword">new</span> AnimatorListener() &#123;</span><br><span class="line"></span><br><span class="line">				<span class="annotation">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="annotation">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="annotation">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">					animatorSet1.start();</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="annotation">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="annotation">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationCancel</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原理分析：</p>
+<ol>
+<li>三个点动画是顺序执行的，所以调用<code>animatorSet.playSequentially()</code></li>
+<li>从左到右三个点停留的位置不一样，分别是屏幕宽度的0.9,0.93,0.96</li>
+<li>从右到左三个点停留的位置也不一样，分别是屏幕宽度的0.01,0.03,0.06</li>
+</ol>
+<h3 id="foursquare_like"><a href="#foursquare_like" class="headerlink" title="foursquare like"></a>foursquare like</h3><p><img src="/uploads/foursquare.gif" alt="enter image description here"></p>
+<p>这个效果是几张图片合成的o(╯□╰)o</p>
+<h3 id="horizontalincreamental_like"><a href="#horizontalincreamental_like" class="headerlink" title="horizontalincreamental like"></a>horizontalincreamental like</h3><p><img src="/uploads/horizontalincreamental.gif" alt="enter image description here"><br>这个效果也是几张图片合成的o(╯□╰)o</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2015年12月17日 - 20时40分</p>
+        <p><span>最后更新:</span>2016年03月24日 - 14时14分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/" title="android-different-loading-animations动画加载分析">http://chenyuanming.cn/2015/12/17/android-github-android-different-loading-animations-project-analysis/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2015/12/17/android-github-android-different-loading-animations-project-analysis/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/21/android-gson-parse-contains-keywords/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Gson解析字段带java关键字解决方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/17/android-fore-update-demo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">APK强制更新Demo，下载利用系统自带下载器实现</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo_u5730_u5740"><span class="toc-number">1.</span> <span class="toc-text">Demo地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows_like"><span class="toc-number">2.</span> <span class="toc-text">windows like</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hangout_like"><span class="toc-number">3.</span> <span class="toc-text">hangout like</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foursquare_like"><span class="toc-number">4.</span> <span class="toc-text">foursquare like</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#horizontalincreamental_like"><span class="toc-number">5.</span> <span class="toc-text">horizontalincreamental like</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/21/android-gson-parse-contains-keywords/" title="上一篇: Gson解析字段带java关键字解决方案">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/17/android-fore-update-demo/" title="下一篇: APK强制更新Demo，下载利用系统自带下载器实现">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git权威指南阅读笔记 | EnjoyCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git权威指南阅读笔记">
+<meta property="og:url" content="http://chenyuanming.cn/2015/12/22/Git Authoritative Guide Note/index.html">
+<meta property="og:site_name" content="EnjoyCode">
+<meta property="og:description">
+<meta property="og:updated_time" content="2016-03-24T06:12:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git权威指南阅读笔记">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="EnjoyCode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Chen Yuanming</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                            
+                                <a class="fl weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Jenkins/" style="font-size: 10px;">Jenkins</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/codes/" style="font-size: 18px;">codes</a> <a href="/tags/experience/" style="font-size: 18px;">experience</a> <a href="/tags/git/" style="font-size: 14px;">git</a> <a href="/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/tags/tips/" style="font-size: 16px;">tips</a> <a href="/tags/tools/" style="font-size: 16px;">tools</a> <a href="/tags/tutorial/" style="font-size: 14px;">tutorial</a> <a href="/tags/vpn/" style="font-size: 12px;">vpn</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://mingyuanchen.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱旅行、爱交友、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Chen Yuanming</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Chen Yuanming</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/ValidToken" title="github">github</a>
+                    
+                        <a class="weibo" target="_blank" href="https://weibo.com/123466678" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Git Authoritative Guide Note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/22/Git Authoritative Guide Note/" class="article-date">
+      <time datetime="2015-12-22T03:09:51.000Z" itemprop="datePublished">2015-12-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git权威指南阅读笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="/"></a><a id="more"></a></p>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C2_u7AE0-_u7231_u4E0Agit_u7684_u7406_u7531"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C2_u7AE0-_u7231_u4E0Agit_u7684_u7406_u7531" class="headerlink" title="git权威指南第2章-爱上git的理由"></a>git权威指南第2章-爱上git的理由</h2><h3 id="u6BCF_u65E5_u5DE5_u4F5C_u5907_u4EFD"><a href="#u6BCF_u65E5_u5DE5_u4F5C_u5907_u4EFD" class="headerlink" title="每日工作备份"></a>每日工作备份</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u #&#26032;&#25991;&#20214;&#20351;&#29992;git add -i&#10;git commit&#10;git push</span><br></pre></td></tr></table></figure>
+<h3 id="u534F_u540C_u5DE5_u4F5C"><a href="#u534F_u540C_u5DE5_u4F5C" class="headerlink" title="协同工作"></a>协同工作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull mirror master  #&#23558;mirror&#25968;&#25454;&#21516;&#27493;&#21040;&#26412;&#22320;,&#21482;&#26159;&#19968;&#20010;&#38236;&#20687;&#65292;&#21482;&#33021;&#36827;&#34892;&#35835;&#25805;&#20316;&#10;git push home #&#20174;&#23478;&#37324;&#38754;&#25552;&#20132;&#32534;&#20889;&#10;git pull home master  #&#21516;&#27493;&#23478;&#37324;&#38754;&#30340;&#25552;&#20132;</span><br></pre></td></tr></table></figure>
+<h3 id="u73B0_u573A_u7248_u672C_u63A7_u5236"><a href="#u73B0_u573A_u7248_u672C_u63A7_u5236" class="headerlink" title="现场版本控制"></a>现场版本控制</h3><ul>
+<li>svn解决方案<br>。。。</li>
+<li><p>git解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- &#21019;&#24314;&#29256;&#26412;&#24211;&#10;git init&#10;- &#28155;&#21152;&#25991;&#20214;&#24182;&#25552;&#20132;&#10;git add -A&#10;git commit -m &#34;commit message&#34;&#10;- &#21019;&#24314;tag&#10;git tag v1&#10;- &#24320;&#22987;&#22312;&#24037;&#20316;&#21306;&#24037;&#20316;&#65292;&#20462;&#25913;&#25991;&#20214;&#24182;&#25552;&#20132;&#10;git commit -a #&#20462;&#25913;&#25991;&#20214;&#24182;&#25552;&#20132;&#10;- &#23545;&#20462;&#25913;&#28385;&#24847;&#24182;&#19988;&#24819;&#23558;&#24037;&#20316;&#25104;&#26524;&#24102;&#36208;&#65292;&#21487;&#20197;&#36890;&#36807;&#19979;&#38754;&#30340;&#21629;&#20196;&#36880;&#20010;&#29983;&#25104;&#34917;&#19969;&#10;git format-patch v1..HEAD #&#20174;tag v1&#21040;&#24403;&#21069;HEAD&#30340;&#25152;&#26377;&#25552;&#20132;&#36880;&#20010;&#29983;&#25104;patch&#10;- &#25226;&#24037;&#20316;&#25104;&#26524;&#24102;&#36208;&#10;git send-email *.patch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写提交说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#20462;&#25913;&#26368;&#26032;&#25552;&#20132;&#30340;&#35828;&#26126;&#10;git commit -amend&#10;#git rebase -i &#60;commit-id&#62;^</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>吃后悔药</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26368;&#26032;&#25552;&#20132;&#20013;&#21253;&#21547;&#20102;&#19981;&#35813;&#25552;&#20132;&#30340;&#25991;&#20214;&#10;git rm --cached windows10.iso&#10;git commit --amend&#10;git rebase -i &#60;commit-id&#62;^</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更好用的提交列表</p>
+</li>
+<li><p>git add</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u #&#23558;&#25152;&#26377;&#20462;&#25913;&#36807;&#30340;&#25991;&#20214;&#21152;&#20837;&#26242;&#23384;&#21306;&#10;git add -A #&#23558;&#25152;&#26377;&#26032;&#24314;&#25110;&#21024;&#38500;&#30340;&#25991;&#20214;&#21152;&#20837;&#26242;&#23384;&#21306;&#10;git add -p #&#23545;&#19968;&#20010;&#25991;&#20214;&#20869;&#30340;&#20462;&#25913;&#26377;&#36873;&#25321;&#24615;&#28155;&#21152;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继续修改暂存区的文件</p>
+</li>
+</ul>
+<p>一个提交到暂存区的文件可以继续修改，继续修改的内容不会被提交，除非对此文件再执行一次git add.即一个文件可以有2个版本，提交暂存区一个，工作区一个。</p>
+<ul>
+<li>git撤销操作</li>
+</ul>
+<p>git支持撤销操作，而且可以撤销任意多次</p>
+<h3 id="u5DE5_u4F5C_u8FDB_u5EA6_u4FDD_u5B58"><a href="#u5DE5_u4F5C_u8FDB_u5EA6_u4FDD_u5B58" class="headerlink" title="工作进度保存"></a>工作进度保存</h3><ul>
+<li>git stash<br>场景：在工作区的修改尚未完成，忽然有一个紧急任务，需要从一个干净的工作区开始新的工作，或者要切换到别的分支进行工作，如何保存当前尚未完成的工作进度？</li>
+<li><p>git解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash&#10;git checkout &#60;new_branch&#62; #&#20999;&#25442;&#21040;&#26032;&#30340;&#20998;&#25903;&#24320;&#21457;&#10;# dev...&#10;git checkout &#60;orignal_branch&#62; #&#20999;&#25442;&#21040;&#20043;&#21069;&#30340;&#20998;&#25903;&#10;git stash pop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代理svn提交实现移动式办公</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git svn clone &#60;svn_repos_url&#62;&#10;# &#26029;&#32593;&#29366;&#24577;&#20381;&#28982;&#21487;&#20197;&#20351;&#29992;git commit&#25552;&#20132;&#10;#&#32593;&#32476;&#24674;&#22797;&#20197;&#21518;&#10;git svn fetch #&#33719;&#21462;svn&#26368;&#26032;&#25552;&#20132;&#10;git svn rebase #&#21464;&#22522;&#25805;&#20316;&#10;git svn dcommit #&#25512;&#36865;&#26412;&#22320;&#25552;&#20132;&#21040;svn&#26381;&#21153;&#22120;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>无处不在的分页器<br>每个git都自动带一个分页器，默认使用less命令(less -FRSX)，下面是分页器常用热键</p>
+</li>
+<li>字母<strong>q</strong>：退出分页器</li>
+<li>字母<strong>h</strong>：显示分页器帮助</li>
+<li><strong>空格</strong> 往下翻页，<strong>b</strong> 往上翻页</li>
+<li>字母<strong>d</strong>和<strong>u</strong>：往下翻半页，往上翻半页</li>
+<li>字母<strong>j</strong>和<strong>k</strong>：往上翻一行，往下翻一行</li>
+<li>如果行太长被截断，使用<strong>左右箭头</strong>让窗口内容滚动</li>
+<li><strong>/pattern</strong> 向下寻找和pattern匹配的内容</li>
+<li><strong>?pattern</strong> 向上寻找和pattern匹配的内容</li>
+<li>字母<strong>n</strong>或<strong>N</strong>：代表向前或向后继续寻找</li>
+<li>字母<strong>g</strong>或<strong>G</strong>：代表跳到第一行或最后一行，输入数字加字母g，跳转到数字对应的行</li>
+<li><strong>!&lt; command&gt; </strong>:可以执行shell命令</li>
+</ul>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C3_u7AE0-git_u5B89_u88C5_u548C_u4F7F_u7528_u548C_u6280_u5DE7"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C3_u7AE0-git_u5B89_u88C5_u548C_u4F7F_u7528_u548C_u6280_u5DE7" class="headerlink" title="git权威指南第3章-git安装和使用和技巧"></a>git权威指南第3章-git安装和使用和技巧</h2><h4 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h4><p>…</p>
+<ul>
+<li>一些技巧</li>
+<li><p>mysysGit 命令行补全和忽略文件大小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./etc/git-comletion.bash #&#34917;&#20840;&#10;set completion-ignore-case on #&#24573;&#30053;&#22823;&#23567;&#20889;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mysysGit中文支持</p>
+</li>
+<li><p>shell中文录入问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#/etc/inputrc&#10;set meta-flag on&#10;set input-meta on&#10;set output-meta on&#10;set convert-meta on</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分页器中文输出问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export LESSCHARSET=utf-8&#10;#&#25110;&#32773;&#32534;&#36753;/etc/profile&#65292;&#35753;shell&#21551;&#21160;&#23601;&#21152;&#36733;&#10;declare -x LESSCHARSET=utf-8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ls显示中文文件名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls --show-control-chars *.txt&#10;alias ls = &#34;ls --show-control-chars&#34;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mysysGit提交乱码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --system i18n.logOutputEncoding gbk&#10;git config --system i18n.commitEncoding gbk&#10;git config --system core.quotepath false&#10;git status -s</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C4_u7AE0-_u521D_u59CB_u5316"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C4_u7AE0-_u521D_u59CB_u5316" class="headerlink" title="git权威指南第4章-初始化"></a>git权威指南第4章-初始化</h2><h4 id="u521D_u59CB_u914D_u7F6E"><a href="#u521D_u59CB_u914D_u7F6E" class="headerlink" title="初始配置"></a>初始配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version&#10;#&#37197;&#32622;&#29992;&#25143;&#21517;&#21644;&#37038;&#20214;&#22320;&#22336;&#10;git config --global user.name &#34;ChenYuanming&#34;&#10;git config --global user.email &#34;git@chenyuanming.cn&#34;&#10;#&#35774;&#32622;&#19968;&#20123;&#21035;&#21517;,&#22914;&#26524;&#24819;&#35753;&#31995;&#32479;&#25152;&#26377;&#29992;&#25143;&#29983;&#25928;&#20351;&#29992;--system,&#22914;&#26524;&#21482;&#23545;&#26412;&#29992;&#25143;&#29983;&#25928;&#20351;&#29992;--global&#10;sudo git config --system alias.st status&#10;sudo git config --system alias.ci commit&#10;sudo git config --system alias.co checkout&#10;sudo git config --system alias.br branch&#10;# &#24320;&#21551;&#39068;&#33394;&#26174;&#31034;&#10;git config --global color.ui true</span><br></pre></td></tr></table></figure>
+<h4 id="u521B_u5EFA_u7248_u672C_u4ED3_u5E93_u5E76_u63D0_u4EA4"><a href="#u521B_u5EFA_u7248_u672C_u4ED3_u5E93_u5E76_u63D0_u4EA4" class="headerlink" title="创建版本仓库并提交"></a>创建版本仓库并提交</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/workspace&#10;git init demo&#10;cd demo&#10;echo &#34;hello world&#34; &#62;&#62; welcome.txt #&#21019;&#24314;&#25991;&#20214;&#10;git add welcome.txt #&#28155;&#21152;&#21040;&#29256;&#26412;&#24211;&#10;git ci -m &#34;initialized.&#34; #&#25552;&#20132;&#65292;ci&#20351;&#29992;&#20102;alias&#65292;&#30456;&#24403;&#20110;commit</span><br></pre></td></tr></table></figure>
+<ul>
+<li>搜索工作区文件内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git grep &#34;&#24037;&#20316;&#21306;&#25991;&#20214;&#20869;&#23481;&#34; #&#20174;&#24403;&#21069;&#30446;&#24405;&#20381;&#27425;&#24448;&#19978;&#26597;&#25214;.git,&#22312;&#31532;&#19968;&#20010;&#25214;&#21040;&#30340;.git&#20013;&#26816;&#32034;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>strace 跟踪命令对磁盘的访问</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/workspace&#10;mkdir -p a/b/c&#10;cd ~/workspace/a/b/c&#10;#&#26174;&#31034;&#29256;&#26412;&#24211;.git&#25152;&#22312;&#20301;&#32622;&#10;git rev-parse --git-dir&#10;#&#26174;&#31034;&#24037;&#20316;&#21306;&#26681;&#30446;&#24405;&#10;git rev-parse --show-toplevel&#10;#&#30456;&#23545;&#20110;&#24037;&#20316;&#21306;&#26681;&#30446;&#24405;&#30340;&#30456;&#23545;&#30446;&#24405;&#10;git rev-parse --show-prefix&#10;&#26174;&#31034;&#24403;&#21069;&#30446;&#24405;&#22238;&#36864;&#21040;&#24037;&#20316;&#30340;&#26681;&#30340;&#28145;&#24230;&#10;git rev-parse --show-cdup</span><br></pre></td></tr></table></figure>
+<ul>
+<li>git config命令参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/workspace/demo&#10;git config -e #&#32534;&#36753;demo/.git/config&#10;git config -e --global #&#20462;&#25913;&#24403;&#21069;&#29992;&#25143; ~/gitconfig&#10;git config -e --system #&#20462;&#25913;&#25152;&#26377;&#29992;&#25143; /etc/gitconfig</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="u67E5_u770B_u8C01_u5B8C_u6210_u7684_u63D0_u4EA4"><a href="#u67E5_u770B_u8C01_u5B8C_u6210_u7684_u63D0_u4EA4" class="headerlink" title="查看谁完成的提交"></a>查看谁完成的提交</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#21024;&#38500;&#37197;&#32622;user,email&#10;git config --unset --global user.name&#10;git config --unset --global user.email&#10;#&#20351;&#29992;--allow-empty&#20801;&#35768;&#31354;&#30333;&#25552;&#20132;&#10;git commit --allow-empty -m &#34;who does this commit&#34;#&#22914;&#26524;&#27809;&#26377;&#37197;&#32622;user.name&#21644;user.email.git&#20250;&#20351;&#29992;&#31995;&#32479;&#20013;&#30340;&#29992;&#25143;&#21517;&#21644;&#37038;&#31665;&#10;#&#22914;&#26524;&#24819;&#20462;&#27491;&#19978;&#38754;&#27809;&#26377;&#37197;&#32622;&#20449;&#24687;&#30340;&#25552;&#20132;&#10;git config --global user.name &#34;ChenYuanming&#34;&#10;git config --global user.email &#34;git@chenyuaming.cn&#34;&#10;git commit --amend --allow-empty --reset-author&#10;git log --pretty=fuller #&#39564;&#35777;&#25552;&#20132;</span><br></pre></td></tr></table></figure>
+<h4 id="u5907_u4EFD_u5DE5_u4F5C_u6210_u679C"><a href="#u5907_u4EFD_u5DE5_u4F5C_u6210_u679C" class="headerlink" title="备份工作成果"></a>备份工作成果</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone demo demo-step-1</span><br></pre></td></tr></table></figure>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C5_u7AE0-_u6682_u5B58_u533A"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C5_u7AE0-_u6682_u5B58_u533A" class="headerlink" title="git权威指南第5章-暂存区"></a>git权威指南第5章-暂存区</h2><h4 id="u4FEE_u6539_u80FD_u4E0D_u80FD_u76F4_u63A5_u63D0_u4EA4_uFF08_u4E0D_u80FD_uFF09"><a href="#u4FEE_u6539_u80FD_u4E0D_u80FD_u76F4_u63A5_u63D0_u4EA4_uFF08_u4E0D_u80FD_uFF09" class="headerlink" title="修改能不能直接提交（不能）"></a>修改能不能直接提交（不能）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#34;Nice to meet you.&#34; &#62;&#62; welcome.txt&#10;git diff #&#27604;&#36739;&#24046;&#24322;&#10;git commit -m &#34;append a nice line.&#34;&#10;git log --pretty=online #&#26408;&#26377;&#19978;&#27425;&#30340;&#25552;&#20132;&#35760;&#24405;&#65292;&#22240;&#20026;&#27809;&#26377;git add&#10;$ git staus -s&#10;M welcome.txt#git add &#20043;&#21069;M&#20301;&#20110;&#31532;&#20108;&#20010;&#20301;&#32622;&#65292;&#31532;&#19968;&#20010;&#20301;&#32622;&#26159;&#31354;&#26684;&#10;$ git add&#10;$ git commit&#10;$ git status -s&#10;M  welcome.txt#git add &#20197;&#21518;&#65292;M&#20301;&#20110;&#31532;&#19968;&#20010;&#20301;&#32622;,$&#27491;&#19979;&#26041;&#10;$ echo &#34;Bye bye.&#34;&#62;&#62;welcome.txt&#10;$ git status -s&#10;MM welcom.txt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>关于git staus -s 出现的两个M，第一列的M：版本库中的文件与处于中间状态(提交任务：提交暂存区)中的文件状态不一致。<br>第二列的M：工作区(本地)中的文件与处于中间状态(提交任务：提交暂存区)中的文件状态不一致。</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>git diff</li>
+<li>git diff 直接对比工作区和暂存区改动(相当于commit和没commit的对比?)</li>
+<li>git diff HEAD 将工作区和HEAD(当前工作分支)对比，(相当于push和没push的对比?)</li>
+<li>git diff –cached,提交暂存区（提交任务，stage）和版本库中文件差异</li>
+<li><p>git diff –staged</p>
+</li>
+<li><p>不要使用git commit -a<br>git commit -a表示对本地所有变更的文件执行提交操作，包括对本地修改的文件和删除的文件，但不包括未被版本库跟踪的文件。</p>
+</li>
+</ul>
+<p>这个命令确实可以简化一些操作，减少用git add命令标识变更文件的步骤，但是如果习惯了这个命令，就会丢掉git暂存区给用户的最大好处：对提交内容进行控制的能力。</p>
+<h4 id="u6401_u7F6E_u95EE_u9898_uFF0C_u6682_u5B58_u72B6_u6001"><a href="#u6401_u7F6E_u95EE_u9898_uFF0C_u6682_u5B58_u72B6_u6001" class="headerlink" title="搁置问题，暂存状态"></a>搁置问题，暂存状态</h4><p>git status状态输出中，Git很体贴的告诉了用户如何将加入暂存区的文件从暂存区撤出以便让暂存区和HEAD一致（git reset HEAD <file>这样提交就不会发生）,还告诉用户，对于暂存区更新后在工作区所做的再一次修改有两种选择：再次git add添加到暂存区；git checkout 检出暂存区文件，取消本地修改。但是现在涉及的命令有些难度，一个是git reset,一个是git checkout。需要先理解什么是HEAD,什么是master分支，以及Git对象存储的实现机制等问题，这样才可以更好地操作暂存区。</file></p>
+<p>这个时候，我们不妨先把当前的工作进度保存起来，先去研究下HEAD和master分支的机制后，继续对暂存区的探索。命令git stash就是用于保存当前工作进度的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &#26412;&#22320;&#24037;&#20316;&#21363;&#20351;&#26377;&#27809;commit&#30340;&#65292;&#20063;&#21487;&#20197;&#20351;&#29992;&#19979;&#38754;&#30340;&#21629;&#20196;&#65292;perfect&#10;git stash&#10;git status# nothing to commit</span><br></pre></td></tr></table></figure>
+<h4 id="Git_u6743_u5A01_u6307_u5357_u89C6_u9891_u89C2_u770B_u540E_u7B14_u8BB0"><a href="#Git_u6743_u5A01_u6307_u5357_u89C6_u9891_u89C2_u770B_u540E_u7B14_u8BB0" class="headerlink" title="Git权威指南视频观看后笔记"></a>Git权威指南视频观看后笔记</h4><ul>
+<li>git add</li>
+<li>git commit 待提交的功能代码</li>
+<li><p>本地编写代码测试暂存区中代码，测试ok以后，测试代码不需要保存,执行git checkout清空测试代码</p>
+</li>
+<li><p>git add,git commit以后想要回滚，git reset head操作以后commit 到暂存区的代码会变成为提交的状态</p>
+</li>
+<li>如果想要修改这部分代码，直接修改，然后再提交</li>
+<li>如果这段代码还是不需要git checkout,清除这部分代码</li>
+<li>git diff –cached 跟git diff head一样的效果</li>
+</ul>
+<ul>
+<li><p>git修改文件后不add，文件会处在游离状态，不隶属于任何分支。有时候切换分支的时候不想把改动带到其他分支，也不想commit到当前分支。这个时候可以用git stash(暂时存档)，以后可以git stash pop</p>
+</li>
+<li><p>只要git commit了，记录都可以找回</p>
+</li>
+</ul>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C6_u7AE0-_u5BF9_u8C61"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C6_u7AE0-_u5BF9_u8C61" class="headerlink" title="git权威指南第6章-对象"></a>git权威指南第6章-对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git log -l --pretty=raw&#10;commit 1a0b7703689afae7d014e2408d3ea3702f8b41de&#10;tree 3d191457c701665828ff2b8e8f037215d770d6dd&#10;parent 9ac01d2d017f73a0af4b3a4899541a57a38ea6f1&#10;Author: chenyuanming &#60;git@chenyuanming.cn&#62;&#10;...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>commit 1a0b7703689afae7d014e2408d3ea3702f8b41de:本次提交的唯一标识</li>
+<li>tree 3d191457c701665828ff2b8e8f037215d770d6dd：本次提交对应的目录树</li>
+<li><p>parent 9ac01d2d017f73a0af4b3a4899541a57a38ea6f1：本地提交的父提交<br>研究Git对象ID的重量级武器就是git cat-file命令，用以下命令可以查看一下这三个ID的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -t 1a0b77&#10;commit&#10;$ git cat-file -t 3d19&#10;tree&#10;$ git cat-file -t 9ac0&#10;commit</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git cat-file -p 可以查看几个对象的内容</p>
+</li>
+<li>SHA1生成<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf Git |sha1sum</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C7_u7AE0-_u91CD_u7F6E"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C7_u7AE0-_u91CD_u7F6E" class="headerlink" title="git权威指南第7章-重置"></a>git权威指南第7章-重置</h2><h4 id="git_u91CD_u7F6E"><a href="#git_u91CD_u7F6E" class="headerlink" title="git重置"></a>git重置</h4><ul>
+<li>修改了一个文件(多次修改commit到暂存区，当前次没有add，提交过)，撤销</li>
+<li>git checkout file</li>
+<li>修改了一个文件(在暂存区)，撤销</li>
+<li>git reset file</li>
+<li>想回到某个版本，当前暂存区，工作区也保存</li>
+<li>git reset –soft commitId</li>
+<li>直接撤销到某次提交，当前记录不要了</li>
+<li>git reset –hard commitId,如果这个时候想再恢复需要用到<strong>git reflog</strong><blockquote>
+<blockquote>
+<p>使用重置命令很危险，会彻底地丢掉历史。恢复需要使用<strong>git reflog</strong></p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h4 id="git_reflog"><a href="#git_reflog" class="headerlink" title="git reflog"></a>git reflog</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config core.logallrefupdates&#10;true&#10;$ tail -5 .git/logs/refs/heads/master&#10;# &#25110;&#32773;&#20351;&#29992;&#19979;&#38754;&#30340;&#21629;&#20196;&#10;$ git reflog show master |  head -5&#10;&#10;git reset --hard master@&#123;1&#125;&#10;git log -online#&#25552;&#20132;&#35760;&#24405;&#23601;&#22238;&#26469;&#20102;</span><br></pre></td></tr></table></figure>
+<h4 id="u6DF1_u5165_u4E86_u89E3git_reset_u547D_u4EE4"><a href="#u6DF1_u5165_u4E86_u89E3git_reset_u547D_u4EE4" class="headerlink" title="深入了解git reset命令"></a>深入了解git reset命令</h4><blockquote>
+<blockquote>
+<p>用法1：git reset [-q] [&lt; commit&gt;] [–] paths…</p>
+<p>用法2：git reset [–soft|–mixed|–hard|–merge|–keep] [-q] [&lt; commit&gt;]</p>
+</blockquote>
+</blockquote>
+<p>上面列出的两个用法，其中<commit>都是可选项，可以使用引用或者提交id，如果省略<commit>则相当于使用了HEAD的指向作为提交id。</commit></commit></p>
+<p>上面列出的两种用法的区别在于，第一种用法在命令中包含路径<paths>。为了避免路径和引用（或者提交id）同名而发生冲突，可以在<paths>前用两个连续的短线（减号）作为分隔。</paths></paths></p>
+<p>第一种用法（包含<paths>）不会重置引用，更不会改变工作区，而是用指定commit状态下的文件替换掉暂存区中的文件。例如：git reset HEAD <paths> 相当于取消执行执行的git add <paths>命令改变的暂存区。</paths></paths></paths></p>
+<p>第二种用法则会重置引用，根据不同的选项，可以对暂存区或工作区进行重置。</p>
+<ul>
+<li>使用–hard</li>
+<li>替换引用的指向，HEAD指向新的提交id</li>
+<li>替换暂存区，替换后，暂存区的内容和引用指向的目录树结构一致</li>
+<li>替换工作区，替换后，工作区的内容和暂存区一致，也和新的HEAD指向的目录树内容相同</li>
+<li>使用–soft</li>
+<li>替换引用的指向，HEAD指向新的提交id，不改变暂存区和工作区</li>
+<li>使用–mixed或者不使用（默认–mixed，如git reset <commit>),不改变工作区</commit></li>
+<li>替换引用的指向，HEAD指向新的提交id</li>
+<li><p>替换暂存区，替换后，暂存区的内容和引用指向的目录树结构一致</p>
+</li>
+<li><p>git reset – filename = git reset HEAD filename,仅将文件改动撤出暂存区，相当于git add filename的反向操作</p>
+</li>
+<li><p>git reset –soft HEAD^<br>工作区和暂存区不改变，但是引用向前回退一次，当对最新的说明或者提交的更改不满意时，撤销最新的提交以便重新提交。</p>
+</li>
+</ul>
+<p>和之前的git commit -amend对比，相当于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^&#10;git commit -e -F .git/COMMIT_EDITMSG</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>git reset HEAD^ = git reset –mixed HEAD^<br>工作区不改变，但是暂存区会退到上一次提交前，引用也回退一次</p>
+</li>
+<li><p>git reset –hard HEAD^<br>彻底撤销最近的提交，引用回退到前一次，而且工作区和暂存区都会回到上一次提交的状态，自上一次以来的提交全部丢失。</p>
+</li>
+</ul>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C8_u7AE0-_u68C0_u51FA"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C8_u7AE0-_u68C0_u51FA" class="headerlink" title="git权威指南第8章-检出"></a>git权威指南第8章-检出</h2><h4 id="u6E38_u79BB_u5934_u6307_u9488"><a href="#u6E38_u79BB_u5934_u6307_u9488" class="headerlink" title="游离头指针"></a>游离头指针</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD&#10;ref: refs/heads/master&#10;$ git branch -v&#10;* master 4902cd3 commit message.&#10;$ git checkout 4902cd3#&#30452;&#25509;checkout &#60;commit id&#62;&#65292;&#22836;&#25351;&#38024;&#20998;&#31163;&#20102;&#10;$ git rev-parse HEAD master #&#22836;&#25351;&#38024;&#20998;&#31163;&#20102;&#10;3d191457c701665828ff2b8e8f037215d770d6dd&#10;9ac01d2d017f73a0af4b3a4899541a57a38ea6f1&#10;#&#27979;&#35797;&#22312;&#28216;&#31163;&#20998;&#25903;&#19978;&#25552;&#20132;&#10;$ touch detach-commit.txt&#10;$ git add detach-commit.txt&#10;$ git commit -m &#34;commit in detached HEAD mode&#34;&#10;[detached HEAD acc2f69]...#&#28216;&#31163;HEAD ID:acc2f69&#10;$ git checou master&#10;$ ls #&#30475;&#19981;&#21040;&#28216;&#31163;&#25991;&#20214;detach-commit.txt</span><br></pre></td></tr></table></figure>
+<h4 id="u62EF_u6551_u6E38_u79BB_u5934_u6307_u9488"><a href="#u62EF_u6551_u6E38_u79BB_u5934_u6307_u9488" class="headerlink" title="拯救游离头指针"></a>拯救游离头指针</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge acc2f69#acc2f69&#26159;&#21018;&#21018;&#28216;&#31163;&#25351;&#38024;&#30340;HEAD&#10;ls #master &#19979;&#38754;&#21487;&#20197;&#30475;&#21040;&#28216;&#31163;&#25991;&#20214;detach-commit.txt&#20102;</span><br></pre></td></tr></table></figure>
+<h4 id="u6DF1_u5165_u7406_u89E3git_checkout_u547D_u4EE4"><a href="#u6DF1_u5165_u7406_u89E3git_checkout_u547D_u4EE4" class="headerlink" title="深入理解git checkout命令"></a>深入理解git checkout命令</h4><blockquote>
+<blockquote>
+<p>用法1：git checkout [-q] [<commit>] [–] <paths>…</paths></commit></p>
+<p>用法2：git checkout [<branch>]</branch></p>
+<p>用法3：git checkout [-m] [[-b|–orphan] <new_branch>] [start_point]</new_branch></p>
+</blockquote>
+</blockquote>
+<p>第一种用法commit是可选项，如果省略则相当于从暂存区(index，<strong>不是工作区HEAD</strong>)进行检出，会覆盖工作区中不相同的内容。不会改变头指针。</p>
+<p>第二种用法则会改变头指针，指向新的branch</p>
+<p>第三种用法主要是创建和切换到新的分支，新的分支从<start_point>指定的提交开始创建。</start_point></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch&#10;git checkout =git checkout HEAD#&#27719;&#24635;&#26174;&#31034;&#24037;&#20316;&#21306;&#65292;&#26242;&#23384;&#21306;&#65292;HEAD&#30340;&#24046;&#24322;&#10;git checkout -- filename #&#26242;&#23384;&#21306;&#26367;&#25442;&#24037;&#20316;&#21306;&#25991;&#20214;&#65292;&#30456;&#24403;&#20110;git add filename &#21453;&#25805;&#20316;,**&#36825;&#20010;&#21629;&#20196;&#20250;&#30452;&#25509;&#26367;&#25442;&#25481;&#26412;&#22320;&#25991;&#20214;&#65292;&#24456;&#21361;&#38505;**&#10;git checkout branch -- filename #&#32500;&#25345;HEAD&#19981;&#21464;&#65292;&#29992;branch&#25351;&#21521;&#25552;&#20132;&#20013;&#30340;filename**&#30452;&#25509;&#35206;&#30422;**&#26242;&#23384;&#21306;&#21644;&#24037;&#20316;&#21306;&#20013;&#21709;&#24212;&#30340;&#25991;&#20214;&#12290;&#10;git checkout -- . = git checkout . #&#26242;&#23384;&#21306;&#25991;&#20214;**&#30452;&#25509;&#35206;&#30422;**&#24037;&#20316;&#21306;&#26412;&#22320;&#25991;&#20214;</span><br></pre></td></tr></table></figure>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C9_u7AE0-_u6062_u590D_u8FDB_u5EA6"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C9_u7AE0-_u6062_u590D_u8FDB_u5EA6" class="headerlink" title="git权威指南第9章-恢复进度"></a>git权威指南第9章-恢复进度</h2><h4 id="git_stash"><a href="#git_stash" class="headerlink" title="git stash"></a>git stash</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git stash list&#10;stash@&#123;0&#125; ...&#10;stash@&#123;1&#125; ...&#10;$ git stash pop&#10;git stash drop &#60;stash id&#62;&#10;git stash clear&#10;####  &#22522;&#20110;&#36827;&#24230;&#24314;&#20998;&#25903;&#10;git stash branch &#60;branch-name&#62; &#60;branch&#62;&#10;&#10;&#10;git clean -nd #&#27979;&#35797;&#35201;&#21024;&#38500;&#30340;&#30446;&#24405;&#21644;&#25991;&#20214;&#10;git clean -fd #&#25191;&#34892;&#30495;&#27491;&#30340;&#21024;&#38500;</span><br></pre></td></tr></table></figure>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C10_u7AE0"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C10_u7AE0" class="headerlink" title="git权威指南第10章"></a>git权威指南第10章</h2><h4 id="u5220_u9664_u6587_u4EF6"><a href="#u5220_u9664_u6587_u4EF6" class="headerlink" title="删除文件"></a>删除文件</h4><p>场景：文件已经被添加到暂存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm *.txt #&#23558;&#25991;&#20214;&#20174;&#26412;&#22320;&#21024;&#38500;&#10;git ls-files #&#26242;&#23384;&#21306;&#36824;&#26377;&#10;#&#20351;&#29992;git rm&#10;git rm *.txt&#10;git commit -m &#34;delete *.txt&#34;&#10;git ls-files -with-tree=HEAD^,#&#25991;&#20214;&#20877;&#29256;&#26412;&#24211;&#21024;&#38500;&#20102;&#65292;&#20294;&#26159;&#21487;&#20197;&#36890;&#36807;&#21382;&#21490;&#29256;&#26412;&#26597;&#30475;</span><br></pre></td></tr></table></figure>
+<p>或者通过下面的方式删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#20808;&#22238;&#28378;&#20043;&#21069;&#30340;&#25805;&#20316;&#10;git reset --hard HEAD^&#10;git stash apply -q#&#24674;&#22797;&#20445;&#30340;&#36827;&#24230;&#10;rm *.txt #&#26412;&#22320;&#21024;&#38500;&#10;git status -s&#10;git add -u#&#23558;&#26412;&#22320;&#25991;&#20214;&#21464;&#26356;&#20840;&#37096;&#35760;&#24405;&#21040;&#26242;&#23384;&#21306;&#20013;</span><br></pre></td></tr></table></figure></p>
+<h4 id="u6062_u590D_u5220_u9664_u7684_u6587_u4EF6"><a href="#u6062_u590D_u5220_u9664_u7684_u6587_u4EF6" class="headerlink" title="恢复删除的文件"></a>恢复删除的文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cat-file -p HEAD~1:welcome.txt &#62; welcome.txt&#10;#&#25110;&#32773;&#20351;&#29992;&#10;git show HEAD~1:welcome.txt &#62;welcome.txt&#10;#&#26368;&#31616;&#21333;&#30340;&#26159;git checkout&#10;git checkout HEAD~1 -- welcome.txt&#10;&#10;####  &#37325;&#26032;&#25552;&#20132;&#25991;&#20214;&#10;git add -A&#10;git commit -m &#34;restore file.&#34;</span><br></pre></td></tr></table></figure>
+<h4 id="u79FB_u52A8_u6587_u4EF6"><a href="#u79FB_u52A8_u6587_u4EF6" class="headerlink" title="移动文件"></a>移动文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git mv welcome.txt README&#10;git commit -m &#34;rename test&#34;&#10;#&#25764;&#38144;&#20043;&#21069;&#30340;&#25552;&#20132;&#10;git reset --hard HEAD^&#10;git ls-files#&#25991;&#20214;&#21464;&#25104;&#25913;&#21517;&#21069;&#30340;welcome.txt</span><br></pre></td></tr></table></figure>
+<h4 id="u6587_u4EF6_u5F52_u6863"><a href="#u6587_u4EF6_u5F52_u6863" class="headerlink" title="文件归档"></a>文件归档</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git archive -o latest.zip HEAD#&#22522;&#20110;&#26368;&#26032;HEAD&#10;git archive -o partial.tar HEAD src doc#&#22522;&#20110;&#26368;&#26032;HEAD &#20013;&#37096;&#20998;&#30446;&#24405;&#10;git archive --format=tar --prefix=1.0/ v1.0 |gzip foo-1.0.tar.gz#&#22522;&#20110;&#37324;&#31243;&#30865;</span><br></pre></td></tr></table></figure>
+<h2 id="git_u6743_u5A01_u6307_u5357_u7B2C11_u7AE0"><a href="#git_u6743_u5A01_u6307_u5357_u7B2C11_u7AE0" class="headerlink" title="git权威指南第11章"></a>git权威指南第11章</h2><h4 id="u67E5_u770B_u603B_u7684_u63D0_u4EA4_u6B21_u6570"><a href="#u67E5_u770B_u603B_u7684_u63D0_u4EA4_u6B21_u6570" class="headerlink" title="查看总的提交次数"></a>查看总的提交次数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rev-list HEAD |wc -l</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>git rev-parse</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">####  &#26174;&#31034;&#20998;&#25903;&#10;git rev-parse --symbolic --branches&#10;#&#26174;&#31034;&#37324;&#31243;&#30865;&#10;git rev-parse --symbolic --tags&#10;#&#26174;&#31034;&#23450;&#20041;&#30340;&#25152;&#26377;&#24341;&#29992;&#10;git rev-parse --symbolic --glob=refs/*&#10;#&#26174;&#31034;HEAD&#23545;&#24212;&#30340;SHA1&#10;git rev-parse HEAD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>git log</p>
+</li>
+<li><p>git diff</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#27604;&#36739;&#37324;&#31243;&#30865;B&#21644;A&#10;git diff B A&#10;#&#27604;&#36739;&#24037;&#20316;&#21306;&#21644;&#37324;&#31243;&#30865;A&#10;git diff A&#10;#&#27604;&#36739;&#26242;&#23384;&#21306;&#21644;&#37324;&#31243;&#30865;A&#10;git diff --cached A&#10;#&#27604;&#36739;&#24037;&#20316;&#21306;&#21644;&#26242;&#23384;&#21306;&#10;git diff&#10;#&#27604;&#36739;&#26242;&#23384;&#21306;&#21644;HEAD&#10;git diff --cached&#10;#&#27604;&#36739;&#24037;&#20316;&#21306;&#21644;HEAD&#10;git diff HEAD</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="git_blame"><a href="#git_blame" class="headerlink" title="git blame"></a>git blame</h4><p>软件发生bug需要定位具体代码的时候使用</p>
+<h4 id="git_bisect"><a href="#git_bisect" class="headerlink" title="git bisect"></a>git bisect</h4><p>在已知坏版本和之前好版本之间查找并标记好提交或者坏提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git bisect start&#10;&#10;git bisect bad&#10;git bisect good&#10;&#10;git checkout bisect/bad&#10;git bisect reset</span><br></pre></td></tr></table></figure>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Chen Yuanming 的个人博客">Chen Yuanming</a></p>
+        <p><span>发布时间:</span>2015年12月22日 - 11时09分</p>
+        <p><span>最后更新:</span>2016年03月24日 - 14时12分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/22/Git Authoritative Guide Note/" title="git权威指南阅读笔记">http://chenyuanming.cn/2015/12/22/Git Authoritative Guide Note/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://chenyuanming.cn/2015/12/22/Git Authoritative Guide Note/　　作者: Chen Yuanming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/12/23/android Material-Design-TextInputLayout/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Material Design TextInputLayout
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/21/android-gson-parse-contains-keywords/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Gson解析字段带java关键字解决方案</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C2_u7AE0-_u7231_u4E0Agit_u7684_u7406_u7531"><span class="toc-number">1.</span> <span class="toc-text">git权威指南第2章-爱上git的理由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6BCF_u65E5_u5DE5_u4F5C_u5907_u4EFD"><span class="toc-number">1.1.</span> <span class="toc-text">每日工作备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u534F_u540C_u5DE5_u4F5C"><span class="toc-number">1.2.</span> <span class="toc-text">协同工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u73B0_u573A_u7248_u672C_u63A7_u5236"><span class="toc-number">1.3.</span> <span class="toc-text">现场版本控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5DE5_u4F5C_u8FDB_u5EA6_u4FDD_u5B58"><span class="toc-number">1.4.</span> <span class="toc-text">工作进度保存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C3_u7AE0-git_u5B89_u88C5_u548C_u4F7F_u7528_u548C_u6280_u5DE7"><span class="toc-number">2.</span> <span class="toc-text">git权威指南第3章-git安装和使用和技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u5B89_u88C5"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C4_u7AE0-_u521D_u59CB_u5316"><span class="toc-number">3.</span> <span class="toc-text">git权威指南第4章-初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u521D_u59CB_u914D_u7F6E"><span class="toc-number">3.0.1.</span> <span class="toc-text">初始配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u521B_u5EFA_u7248_u672C_u4ED3_u5E93_u5E76_u63D0_u4EA4"><span class="toc-number">3.0.2.</span> <span class="toc-text">创建版本仓库并提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u67E5_u770B_u8C01_u5B8C_u6210_u7684_u63D0_u4EA4"><span class="toc-number">3.0.3.</span> <span class="toc-text">查看谁完成的提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u5907_u4EFD_u5DE5_u4F5C_u6210_u679C"><span class="toc-number">3.0.4.</span> <span class="toc-text">备份工作成果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C5_u7AE0-_u6682_u5B58_u533A"><span class="toc-number">4.</span> <span class="toc-text">git权威指南第5章-暂存区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u4FEE_u6539_u80FD_u4E0D_u80FD_u76F4_u63A5_u63D0_u4EA4_uFF08_u4E0D_u80FD_uFF09"><span class="toc-number">4.0.1.</span> <span class="toc-text">修改能不能直接提交（不能）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6401_u7F6E_u95EE_u9898_uFF0C_u6682_u5B58_u72B6_u6001"><span class="toc-number">4.0.2.</span> <span class="toc-text">搁置问题，暂存状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git_u6743_u5A01_u6307_u5357_u89C6_u9891_u89C2_u770B_u540E_u7B14_u8BB0"><span class="toc-number">4.0.3.</span> <span class="toc-text">Git权威指南视频观看后笔记</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C6_u7AE0-_u5BF9_u8C61"><span class="toc-number">5.</span> <span class="toc-text">git权威指南第6章-对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C7_u7AE0-_u91CD_u7F6E"><span class="toc-number">6.</span> <span class="toc-text">git权威指南第7章-重置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_u91CD_u7F6E"><span class="toc-number">6.0.1.</span> <span class="toc-text">git重置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_reflog"><span class="toc-number">6.0.2.</span> <span class="toc-text">git reflog</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6DF1_u5165_u4E86_u89E3git_reset_u547D_u4EE4"><span class="toc-number">6.0.3.</span> <span class="toc-text">深入了解git reset命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C8_u7AE0-_u68C0_u51FA"><span class="toc-number">7.</span> <span class="toc-text">git权威指南第8章-检出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u6E38_u79BB_u5934_u6307_u9488"><span class="toc-number">7.0.1.</span> <span class="toc-text">游离头指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u62EF_u6551_u6E38_u79BB_u5934_u6307_u9488"><span class="toc-number">7.0.2.</span> <span class="toc-text">拯救游离头指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6DF1_u5165_u7406_u89E3git_checkout_u547D_u4EE4"><span class="toc-number">7.0.3.</span> <span class="toc-text">深入理解git checkout命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C9_u7AE0-_u6062_u590D_u8FDB_u5EA6"><span class="toc-number">8.</span> <span class="toc-text">git权威指南第9章-恢复进度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git_stash"><span class="toc-number">8.0.1.</span> <span class="toc-text">git stash</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C10_u7AE0"><span class="toc-number">9.</span> <span class="toc-text">git权威指南第10章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u5220_u9664_u6587_u4EF6"><span class="toc-number">9.0.1.</span> <span class="toc-text">删除文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6062_u590D_u5220_u9664_u7684_u6587_u4EF6"><span class="toc-number">9.0.2.</span> <span class="toc-text">恢复删除的文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u79FB_u52A8_u6587_u4EF6"><span class="toc-number">9.0.3.</span> <span class="toc-text">移动文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6587_u4EF6_u5F52_u6863"><span class="toc-number">9.0.4.</span> <span class="toc-text">文件归档</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git_u6743_u5A01_u6307_u5357_u7B2C11_u7AE0"><span class="toc-number">10.</span> <span class="toc-text">git权威指南第11章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#u67E5_u770B_u603B_u7684_u63D0_u4EA4_u6B21_u6570"><span class="toc-number">10.0.1.</span> <span class="toc-text">查看总的提交次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_blame"><span class="toc-number">10.0.2.</span> <span class="toc-text">git blame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git_bisect"><span class="toc-number">10.0.3.</span> <span class="toc-text">git bisect</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'yuanming.chen',
+      repo: 'mingyuanchen.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/23/android Material-Design-TextInputLayout/" title="上一篇: Material Design TextInputLayout">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/12/21/android-gson-parse-contains-keywords/" title="下一篇: Gson解析字段带java关键字解决方案">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava-Demo/">RxJava使用场景</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/20/rxjava-note/">RxJava学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/28/MemoryLeakAnalysis-HandlerLeak/">MemoryLeakAnalysis-Handler导致的内存泄露</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/MemoryLeakAnalysis-StaticInstance/">MemoryLeakAnalysis-非静态内部类的静态实例造成内存泄漏</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/24/android-git-gradle-Jenkins-compile/">Windows下Jenkins+Git+Gradle实现android开发持续集成、打包</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/23/android Material-Design-TextInputLayout/">Material Design TextInputLayout</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/22/Git Authoritative Guide Note/">git权威指南阅读笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/android-gson-parse-contains-keywords/">Gson解析字段带java关键字解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-github-android-different-loading-animations-project-analysis/">android-different-loading-animations动画加载分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/17/android-fore-update-demo/">APK强制更新Demo，下载利用系统自带下载器实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/16/android-databinding-guide-cn/">databinding guide 翻译</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/revert-git-reset-hard/">git reset -hard 的误操作的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge/">Git怎样撤销一次分支的合并Merge</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/15/git-merge-squash/">git merge –squash介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-lnmp/">lnmp安装记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-spinner-pretty/">修改Spinner下拉选择框选中项的字体大小，字体颜色等</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-json-generate-javabean/">json一键生成javabean</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-Installation-error-INSTALL-FAILED-MEDIA-UNAVAILABLE/">Installation error- INSTALL_FAILED_MEDIA_UNAVAILABLE导致error unknown command "setInstallLocation"解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-usage-of-gsonbuilder/">GsonBuilder用法笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-github-team-work/">github多人协作的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-solve-fragment-already-active/">fragment多次调用setArguments()导致java.lang.IllegalStateException- Fragment already active解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-shandowsocks-and-auto-start/">DigitalOcean Ubuntu下秒搭shadowsocks并开机自动启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/digitalocean-install-wordpress-on-ubuntu/">digitalocean ubuntu下搭建wordpress教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-usage/">开源混淆工具ProGuard配置详解及配置实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-apk-hot-fix/">关于Android程序bug在线热修复</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-qq-backgroud-keep-alive/">手机QQ后台为何清不掉</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-convenient-tools/">android便捷工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-multidex/">DEX 方法超过64K限制和gradle编译OOM问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-get-redirect-url/">获取短链接后的真实url</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-show-window-in-background/">Android中后台显示悬浮窗口的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-font-display-effect/">android不同字体渲染导致特殊符号显示效果差别大的问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-proguard-remove-logs/">android 通过配置混淆文件配置release的时候不打log</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-picture-rotation/">android 拍照后通过Intent传参数控制照片方向自动旋转</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-simplify-findviewbyid/">android 使用泛型写findViewById，再也不用强转了</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/android-studio-tips/">android studio tips</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/usage-of-strings-xml/">usage of strings.xml</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/AndroidAbstractLayout-md/">Android抽象布局——include、merge 、ViewStub</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/android-json2java-1-4/">android json2java 1.4</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/AndroidMemoryManangement-md/">Android内存管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/10/Json2Java-md/">JSON转JavaBean工具</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Chen Yuanming
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >博客阅读总量: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
